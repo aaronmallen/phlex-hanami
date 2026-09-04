@@ -1,0 +1,102 @@
+plugins:
+  - rubocop-ordered_methods
+  - rubocop-performance
+  - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+  SuggestExtensions: false
+  TargetRubyVersion: 3.3
+
+# rubocop-rspec defaults to every file under spec/, which would apply spec conventions to the
+# fixture Hanami app and its boot scripts.
+RSpec:
+  Include:
+    - "**/*_spec.rb"
+
+# A Phlex class collects its props in `initialize` and has no parent initializer to call, so this
+# cop fires on every well-written view. Users of this gem will want the same entry.
+Lint/MissingSuper:
+  AllowedParentClasses:
+    - Phlex::HTML
+    - Phlex::SVG
+    - Phlex::Hanami::View
+    # The fixture app's own base views.
+    - Admin::View
+    - TestApp::View
+
+# A Phlex layout yields inside a nested element block (`body { yield }`); there is no explicit
+# block argument that expresses that. Users of this gem will want the same entry.
+Style/ExplicitBlockArgument:
+  Enabled: false
+
+Layout/LineEndStringConcatenationIndentation:
+  EnforcedStyle: indented
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Naming/FileName:
+  Exclude:
+    - ../lib/phlex-hanami.rb
+
+Metrics/BlockLength:
+  CountAsOne:
+    - array
+    - hash
+    - heredoc
+    - method_call
+
+Metrics/ClassLength:
+  CountAsOne:
+    - array
+    - hash
+    - heredoc
+    - method_call
+
+Metrics/MethodLength:
+  CountAsOne:
+    - array
+    - hash
+    - heredoc
+    - method_call
+
+Metrics/ModuleLength:
+  CountAsOne:
+    - array
+    - hash
+    - heredoc
+    - method_call
+
+# Keyword arguments are named at the call site, so a long list of them does not carry the cost this
+# cop is guarding against.
+Metrics/ParameterLists:
+  CountKeywordArgs: false
+
+RSpec/DescribeClass:
+  Exclude:
+    - "../spec/integration/**/*"
+
+RSpec/ExampleLength:
+  Max: 10
+
+RSpec/MultipleExpectations:
+  Max: 3
+
+RSpec/SpecFilePathFormat:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: diff_comma
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: diff_comma
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: diff_comma

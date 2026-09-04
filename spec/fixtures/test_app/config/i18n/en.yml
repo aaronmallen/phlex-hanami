@@ -1,0 +1,6 @@
+en:
+  interpolated: "Hello %{name}"
+  greeting: "Hello from i18n"
+  posts:
+    translated:
+      heading: "Posts, relatively"

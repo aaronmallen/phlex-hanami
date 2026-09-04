@@ -1,0 +1,23 @@
+[settings]
+lockfile = true
+
+[task_config]
+includes = ["scripts"]
+
+[tasks.format]
+alias = ["fmt"]
+description = "Format all files"
+depends = ["format:**"]
+
+[tasks.lint]
+alias = ["l"]
+description = "Lint all files"
+depends = ["lint:**"]
+
+[tools]
+editorconfig-checker = "latest"
+markdownlint-cli2 = "latest"
+ruby = "4"
+shellcheck = "latest"
+shfmt = "latest"
+yamlfmt = "latest"

@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+#MISE description="Validate all rbs signatures"
+#MISE alias=["l:rbs", "l:types", "lint:types"]
+
+set -e
+
+bundle exec rbs -I sig validate

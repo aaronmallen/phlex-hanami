@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+#MISE description="Push the gem to rubygems.org"
+#MISE depends=["build"]
+
+set -e
+
+gem push pkg/phlex-hanami-*.gem
