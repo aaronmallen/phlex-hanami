@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v0.2.0-alpha.2] - 2026-09-05
+
 ### Added
 
 - Phlex views for [hanami-mailer]. A mailer renders the Phlex class whose container key matches its own, so
@@ -33,7 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [hanami-mailer]: https://github.com/hanami/mailer
 
-## [v0.2.0-alpha.1] - 2024-10-05
+## [v0.2.0-alpha.1] - 2026-09-04
 
 Initial alpha release by the new maintainer [@aaronmallen](https://github.com/aaronmallen).
 
@@ -41,5 +43,7 @@ Initial alpha release by the new maintainer [@aaronmallen](https://github.com/aa
 
 Initial release, by the previous maintainer [@stephannv](https://github.com/stephannv).
 
-[Unreleased]: https://github.com/aaronmallen/phlex-hanami/compare/0.1.0...HEAD
+[Unreleased]: https://github.com/aaronmallen/phlex-hanami/compare/0.2.0-alpha.2...HEAD
+[v0.2.0-alpha.2]: https://github.com/aaronmallen/phlex-hanami/compare/0.2.0-alpha.1...0.2.0-alpha.2
+[v0.2.0-alpha.1]: https://github.com/aaronmallen/phlex-hanami/releases/tag/0.2.0-alpha.1
 [v0.1.0]: https://github.com/stephannv/phlex-hanami/releases/tag/v0.1.0
