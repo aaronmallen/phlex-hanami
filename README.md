@@ -118,11 +118,65 @@ end
 If you already have your own `Phlex::HTML` base class, include `Phlex::Hanami::Renderable` into it instead of
 subclassing `Phlex::Hanami::View`; the two are equivalent.
 
+### Mail
+
+A mailer is paired with a view the same way an action is. Write the view as a `Phlex::Hanami::Mailer::View` under
+the slice's `Views::Mailers` namespace, and the mailer renders it:
+
+```ruby
+# app/mailers/welcome.rb
+module MyApp
+  module Mailers
+    class Welcome < Hanami::Mailer
+      from "hello@example.com"
+      to { |user| user.email }
+      subject "Welcome"
+
+      expose :user
+    end
+  end
+end
+
+# app/views/mailers/welcome.rb
+module MyApp
+  module Views
+    module Mailers
+      class Welcome < Phlex::Hanami::Mailer::View
+        def initialize(user:) = @user = user
+
+        def view_template
+          h1 { "Welcome, #{@user.name}" }
+          p { a(href: url(:posts)) { "Read the latest" } }
+        end
+      end
+    end
+  end
+end
+```
+
+Mail has its own layout convention: name one `Views::Mailers::Layout` and every mail view in the slice renders
+inside it. The web `Views::Layout` is never used for mail. `layout` and `layout nil` work as they do elsewhere.
+
+The plain text part of the message comes from the same view. `Phlex::Hanami::Mailer::Text` converts the rendered
+HTML, layout included, so anchors become `label <url>`, list items become `- item`, and entities are unescaped. To
+write the text part yourself, override `text_body`:
+
+```ruby
+def text_body(_html)
+  "Welcome, #{@user.name}. Read the latest: #{url(:posts)}"
+end
+```
+
+An email is read outside the app, so `path` raises in a mail view; use `url`. There is no request behind a mail
+view either, so `request`, `session`, `flash` and `csrf_token` say so rather than returning something empty. Routes,
+assets, i18n and `content_for` all work.
+
 ## How it works
 
-Requiring the gem installs a single extension — `Phlex::Hanami::Extensions::Slice` is prepended onto
-`Hanami::Slice::ClassMethods` — and everything else follows from what Hanami already does. Hanami is never taught
-that Phlex exists; a Phlex view is simply made to satisfy the contract Hanami already has.
+Requiring the gem prepends `Phlex::Hanami::Extensions::Slice` onto `Hanami::Slice::ClassMethods`, and
+`Phlex::Hanami::Extensions::Mailer` onto `Hanami::Mailer` when that gem is bundled. Everything else follows from
+what Hanami already does. Hanami is never taught that Phlex exists; a Phlex view is simply made to satisfy the
+contract Hanami already has.
 
 **Phlex classes register in the container as classes.** When a slice is prepared, the extension installs a
 `Dry::System` component-dir `instance` proc that returns `component.loader.constant(component)` for any
@@ -157,6 +211,14 @@ Hanami's actions, views and mailers use, so a view knows the slice it belongs to
 `Views::Layout` is resolved, and how a relative i18n key (`t(".title")`) resolves against the view's container key —
 `MyApp::Views::Posts::Index` looks up `posts.index.title`.
 
+**Mail is the same trick again.** `Hanami::Mailer` renders through any object taking `call(format:, **input)`, so
+`Phlex::Hanami::Extensions::Mailer` is prepended onto it to answer `view` with the Phlex class whose container key
+matches — `MyApp::Mailers::Welcome` to `views.mailers.welcome` — and a mail view answers to the format. Hanami calls
+once per part, and the text part is the HTML part converted. A mailer with no Phlex view falls through to whatever
+hanami-mailer would have done, so an app can move its mail over one message at a time. Nothing installs unless
+hanami-mailer is bundled. Hanami has no view context to hand a mailer, because there is no request to build one
+from, so the view builds the slice's own context itself, with the request left out.
+
 **Escaping stays Phlex's.** Phlex escapes by default. Hanami's helpers return `SafeString`s meant to be interpolated
 into a template, so `Hanami::View::HTML::SafeString` is marked as a Phlex safe object and emitted without
 double-escaping. Where Hanami's helper library defines `raw` and `tag`, which Phlex already owns, Phlex's
@@ -173,6 +235,7 @@ In the current alpha:
 - [x] Layouts: a base class, a per-slice convention, a per-view override and an opt-out
 - [x] Hanami's standard helpers, i18n and CSRF-protected forms inside Phlex views
 - [x] A bootable Hanami app fixture the spec suite drives through real requests
+- [x] Phlex views for hanami-mailer, with a generated plain text alternative part
 
 Before 0.2.0 final:
 
@@ -185,7 +248,6 @@ Before 0.2.0 final:
 After 0.2.0:
 
 - [ ] Code reloading and memoization in development
-- [ ] Phlex views for hanami-mailer, with a generated plain-text alternative part
 - [ ] `hanami generate` producing Phlex views instead of ERB templates
 
 ## Development
