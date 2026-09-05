@@ -124,7 +124,7 @@ module Phlex
         # @api private
         # @since 0.2.0
         def configure_for_slice(slice)
-          extend SliceConfiguredView.new(slice)
+          extend SliceConfigured.new(slice)
         end
 
         # The layout configured on this class, or inherited from a superclass. {UNSET} when none has

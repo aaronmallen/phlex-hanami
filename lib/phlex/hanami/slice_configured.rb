@@ -2,15 +2,15 @@
 
 module Phlex
   module Hanami
-    # Provides slice-specific configuration to a {Renderable} view defined in a slice's namespace.
+    # Tells a class which slice it belongs to.
     #
-    # `Hanami::SliceConfigurable` calls `configure_for_slice` once per slice as views are defined,
-    # so a view in the app namespace is configured for the app and one in a slice namespace is
-    # configured for that slice.
+    # `Hanami::SliceConfigurable` calls `configure_for_slice` once per slice as classes are defined,
+    # so a class in the app namespace is configured for the app and one in a slice namespace is
+    # configured for that slice. {Renderable} views and Hanami mailers both extend one of these.
     #
     # @api private
     # @since 0.2.0
-    class SliceConfiguredView < Module
+    class SliceConfigured < Module
       # The slice this module configures for.
       #
       # @return [Hanami::Slice]
@@ -28,7 +28,7 @@ module Phlex
 
       # @api private
       # @since 0.2.0
-      def extended(_view_class)
+      def extended(_klass)
         define_slice
       end
 
