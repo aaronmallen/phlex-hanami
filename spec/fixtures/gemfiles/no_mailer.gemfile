@@ -4,11 +4,10 @@ source "https://gem.coop"
 
 gemspec path: File.expand_path("../../..", __dir__)
 
-# The point of this Gemfile: exercise the path where Hanami builds the view context itself.
+# The point of this Gemfile: exercise an app that does not send mail, where `Hanami::Mailer` is not
+# a constant and nothing may reach for it.
 gem "hanami-action", "~> 3.0"
-gem "hanami-mailer", "~> 3.0"
 gem "hanami-router", "~> 3.0"
-gem "hanami-view", "~> 3.0"
 gem "i18n", "~> 1.14"
 gem "rack", "~> 3.0"
 gem "rack-test", "~> 2.0"

@@ -10,6 +10,7 @@ end
 
 group :development, :test do
   gem "hanami-action", "~> 3.0"
+  gem "hanami-mailer", "~> 3.0"
   gem "hanami-router", "~> 3.0"
   gem "i18n", "~> 1.14"
   gem "rack", "~> 3.0"

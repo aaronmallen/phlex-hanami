@@ -14,6 +14,7 @@ ENV["FINALIZE"] == "1" ? TestApp::App.boot : TestApp::App.prepare
 session = Rack::Test::Session.new(Rack::MockSession.new(Hanami.app))
 
 puts "hanami_view_bundled=#{Hanami.bundled?('hanami-view')}"
+puts "hanami_mailer_bundled=#{Hanami.bundled?('hanami-mailer')}"
 puts "app_view_class=#{TestApp::App['views.posts.index']}"
 puts "app_view_is_class=#{TestApp::App['views.posts.index'].is_a?(Class)}"
 puts "slice_view_class=#{Admin::Slice['views.posts.index']}"

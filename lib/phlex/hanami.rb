@@ -42,3 +42,7 @@ end.setup
 # Installs the integration. Referencing the constant is what autoloads it, so this cannot move into
 # the file itself — nothing else would ever refer to it.
 Hanami::Slice::ClassMethods.prepend(Phlex::Hanami::Extensions::Slice)
+
+# Mail is a second entry point, and an optional one. Zeitwerk keeps the mail classes unloaded until
+# something names one, but prepending onto `Hanami::Mailer` needs the constant to exist.
+Phlex::Hanami::Extensions::Mailer.install if Hanami.bundled?("hanami-mailer")

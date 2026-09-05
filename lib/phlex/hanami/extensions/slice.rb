@@ -53,7 +53,9 @@ module Phlex
           # Defines `Views::Context` for the slice when nothing else has.
           #
           # Does nothing when hanami-view is bundled, because Hanami defines its own richer context
-          # there, and nothing when the user has defined one themselves.
+          # there, and returns the existing one when the user has defined it themselves.
+          #
+          # @return [Class, nil] the slice's context class
           #
           # @api private
           # @since 0.2.0
@@ -61,7 +63,7 @@ module Phlex
             return if ::Hanami.bundled?("hanami-view")
 
             namespace = views_namespace(slice)
-            return if namespace.const_defined?(:Context, false)
+            return namespace.const_get(:Context, false) if namespace.const_defined?(:Context, false)
 
             # The class is anonymous at this point, so the slice cannot be inferred from its name
             # the way `Hanami::SliceConfigurable` would; configure it explicitly instead.
@@ -81,6 +83,22 @@ module Phlex
             return if component_dirs.configured?(:instance)
 
             component_dirs.instance = COMPONENT_INSTANCE
+          end
+
+          # The class an action's view context is built from, for anything rendering outside a
+          # request that needs the same one.
+          #
+          # Reads the third-party slot `Hanami::Extensions::Action::SliceConfiguredAction` reads,
+          # so a mail view and a request view are given the same class.
+          #
+          # @return [Class]
+          #
+          # @api private
+          # @since 0.2.0
+          def view_context_class(slice)
+            return ::Hanami::Extensions::View::Context.context_class(slice) if ::Hanami.bundled?("hanami-view")
+
+            define_view_context(slice)
           end
 
           private

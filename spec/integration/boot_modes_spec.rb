@@ -67,4 +67,14 @@ RSpec.describe "booting the fixture app" do
       expect(report["context_is_ours"]).to eq("false")
     end
   end
+
+  describe "without hanami-mailer bundled" do
+    let(:gemfile) { File.expand_path("../fixtures/gemfiles/no_mailer.gemfile", __dir__) }
+
+    it_behaves_like "a working integration"
+
+    it "installs nothing onto a mailer that is not there" do
+      expect(report["hanami_mailer_bundled"]).to eq("false")
+    end
+  end
 end

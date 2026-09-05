@@ -4,3 +4,6 @@ en:
   posts:
     translated:
       heading: "Posts, relatively"
+  mailers:
+    translated:
+      heading: "Mail, relatively"

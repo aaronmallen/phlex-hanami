@@ -21,6 +21,7 @@ Lint/MissingSuper:
     - Phlex::HTML
     - Phlex::SVG
     - Phlex::Hanami::View
+    - Phlex::Hanami::Mailer::View
     # The fixture app's own base views.
     - Admin::View
     - TestApp::View
