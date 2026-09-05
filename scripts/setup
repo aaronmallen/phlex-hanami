@@ -7,3 +7,8 @@ set -e
 mise trust >/dev/null 2>&1
 mise install
 bundle install
+
+# The integration specs shell out under these, so they need their own installed bundles.
+for gemfile in spec/fixtures/gemfiles/*.gemfile; do
+  BUNDLE_GEMFILE="$gemfile" bundle install
+done

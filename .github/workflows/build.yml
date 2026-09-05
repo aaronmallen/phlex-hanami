@@ -19,8 +19,8 @@ permissions:
   contents: read
 
 jobs:
-  build:
-    name: Build
+  lint:
+    name: Lint
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -34,6 +34,28 @@ jobs:
 
       - name: Lint
         run: mise run lint
+
+  test:
+    name: Test (Ruby ${{ matrix.ruby }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby:
+          - "3.3"
+          - "3.4"
+          - "4.0"
+    env:
+      MISE_RUBY_VERSION: ${{ matrix.ruby }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Install mise
+        uses: jdx/mise-action@v4
+
+      - name: Setup
+        run: mise run setup
 
       - name: Test
         run: mise run test
