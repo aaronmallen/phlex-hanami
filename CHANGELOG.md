@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - A plain text alternative part, converted from the rendered HTML by `Phlex::Hanami::Mailer::Text`. Override
   `text_body` on the view to write it by hand.
 - A mail layout convention: `Views::Mailers::Layout` in a slice wraps that slice's mail views.
+- Usage documentation under [docs/usage](docs/usage/README.md), covering views, layouts, the view context,
+  helpers, mailers and how the gem hooks into Hanami.
 - `Phlex::Hanami::MailerViewError`, raised when a mailer is paired with a Phlex view that is not a mail view,
   rather than sending a message whose plain text part is markup.
 

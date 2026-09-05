@@ -1,0 +1,29 @@
+# Usage
+
+Guides for the parts of phlex-hanami, in the order most people meet them. The
+[README](../../README.md#quick-start) covers the first five minutes.
+
+- [Views](views.md)
+
+  The base classes, how Hanami finds the view for an action, what a view receives, and what happens to input the
+  view did not ask for.
+
+- [Layouts](layouts.md)
+
+  The `Views::Layout` convention, setting a different layout, opting out, and where `content_for` fits.
+
+- [View context](view-context.md)
+
+  Routes, assets, `content_for`, flash, session, request and i18n, in a view and in every component under it.
+
+- [Helpers](helpers.md)
+
+  Hanami's helper library, why it is opt in, how escaping works, and translations with relative keys.
+
+- [Mailers](mailers.md)
+
+  Phlex views for hanami-mailer, the mail layout convention, and the plain text part of a message.
+
+- [How it works](how-it-works.md)
+
+  What the gem installs into Hanami and why. Read this before changing the gem, or when something surprises you.
