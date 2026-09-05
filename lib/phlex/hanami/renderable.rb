@@ -354,12 +354,18 @@ module Phlex
 
       # The full URL for a named route.
       #
+      # Hanami's routes helper returns a `URI`; Phlex writes strings, and rejects anything else as
+      # an attribute value, so this hands back the string.
+      #
+      # @example
+      #   a(href: url(:posts)) { "Posts" }
+      #
       # @return [String]
       #
       # @api public
       # @since 0.2.0
       def url(...)
-        routes.url(...)
+        routes.url(...).to_s
       end
 
       private
