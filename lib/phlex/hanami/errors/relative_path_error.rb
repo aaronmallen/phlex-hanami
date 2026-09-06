@@ -12,6 +12,7 @@ module Phlex
     class RelativePathError < Error
       # @api private
       # @since 0.2.0
+      #: (singleton(::Phlex::SGML)) -> void
       def initialize(view_class)
         super(<<~MESSAGE)
           #{view_class} asked for a relative path, and an email needs a full URL.

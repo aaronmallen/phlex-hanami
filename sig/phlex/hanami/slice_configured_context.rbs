@@ -3,25 +3,25 @@
 module Phlex
   module Hanami
     class SliceConfiguredContext < Module
-      attr_reader slice: untyped
+      attr_reader slice: singleton(::Hanami::Slice)
 
-      def initialize: (untyped slice) -> untyped
+      def initialize: (singleton(::Hanami::Slice)) -> void
 
-      def extended: (untyped _context_class) -> untyped
+      def extended: (singleton(Context)) -> void
 
-      def inspect: () -> untyped
+      def inspect: () -> String
 
       private
 
-      def define_new: () -> untyped
+      def define_new: () -> void
 
-      def dependencies: () -> untyped
+      def dependencies: () -> Hash[Symbol, untyped]
 
-      def resolve_assets: () -> untyped
+      def resolve_assets: () -> ::Hanami::Assets?
 
-      def resolve_i18n: () -> untyped
+      def resolve_i18n: () -> ::Hanami::Providers::I18n::Backend?
 
-      def resolve_routes: () -> untyped
+      def resolve_routes: () -> ::Hanami::Slice::RoutesHelper?
     end
   end
 end

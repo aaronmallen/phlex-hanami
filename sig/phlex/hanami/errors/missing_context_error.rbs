@@ -3,7 +3,7 @@
 module Phlex
   module Hanami
     class MissingContextError < Error
-      def initialize: (untyped view_class) -> untyped
+      def initialize: (singleton(::Phlex::SGML)) -> void
     end
   end
 end

@@ -17,10 +17,11 @@ module Phlex
       #
       # @api private
       # @since 0.2.0
-      attr_reader :slice
+      attr_reader :slice #: singleton(::Hanami::Slice)
 
       # @api private
       # @since 0.2.0
+      #: (singleton(::Hanami::Slice)) -> void
       def initialize(slice)
         super()
         @slice = slice
@@ -28,18 +29,21 @@ module Phlex
 
       # @api private
       # @since 0.2.0
+      #: (singleton(::Phlex::SGML) | singleton(::Hanami::Mailer)) -> void
       def extended(_klass)
         define_slice
       end
 
       # @api private
       # @since 0.2.0
+      #: () -> String
       def inspect
         "#<#{self.class.name}[#{slice.name}]>"
       end
 
       private
 
+      #: () -> void
       def define_slice
         slice = @slice
 

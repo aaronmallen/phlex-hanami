@@ -9,6 +9,7 @@ module Phlex
     class MissingContextError < Error
       # @api private
       # @since 0.2.0
+      #: (singleton(::Phlex::SGML)) -> void
       def initialize(view_class)
         super(<<~MESSAGE)
           #{view_class} was rendered without a Hanami view context.

@@ -17,6 +17,7 @@ module Phlex
 
       # @api private
       # @since 0.2.0
+      #: (singleton(::Hanami::Slice)) -> void
       def self.configure_for_slice(slice)
         extend SliceConfiguredContext.new(slice)
       end
@@ -27,12 +28,20 @@ module Phlex
       #
       # @api public
       # @since 0.2.0
-      attr_reader :inflector
+      attr_reader :inflector #: Dry::Inflector
 
       # @see SliceConfiguredContext#define_new
       #
       # @api private
       # @since 0.2.0
+      #: (
+      #    ?inflector: Dry::Inflector?,
+      #    ?routes: ::Hanami::Slice::RoutesHelper?,
+      #    ?assets: ::Hanami::Assets?,
+      #    ?request: ::Hanami::Action::Request?,
+      #    ?i18n: ::Hanami::Providers::I18n::Backend?,
+      #    **untyped
+      #  ) -> void
       def initialize(inflector: nil, routes: nil, assets: nil, request: nil, i18n: nil, **)
         @inflector = inflector
         @routes = routes
@@ -50,6 +59,7 @@ module Phlex
       #
       # @api public
       # @since 0.2.0
+      #: () -> ::Hanami::Assets
       def assets
         raise ::Hanami::ComponentLoadError, "Assets not available. #{assets_hint}" unless @assets
 
@@ -65,6 +75,7 @@ module Phlex
       #
       # @api public
       # @since 0.2.0
+      #: (Symbol, ?String?) ?{ () -> String } -> String?
       def content_for(key, value = nil)
         if block_given?
           @content_for[key] = yield
@@ -85,6 +96,7 @@ module Phlex
       #
       # @api public
       # @since 0.2.0
+      #: () -> String?
       def csrf_token
         request.session[::Hanami::Action::CSRFProtection::CSRF_TOKEN]
       end
@@ -95,6 +107,7 @@ module Phlex
       #
       # @api public
       # @since 0.2.0
+      #: () -> ::Hanami::Action::Flash
       def flash
         request.flash
       end
@@ -105,6 +118,7 @@ module Phlex
       #
       # @api public
       # @since 0.2.0
+      #: () -> ::Hanami::Providers::I18n::Backend
       def i18n
         raise ::Hanami::ComponentLoadError, "the i18n gem is required to access translations" unless @i18n
 
@@ -113,6 +127,7 @@ module Phlex
 
       # @api private
       # @since 0.2.0
+      #: (self) -> void
       def initialize_copy(source)
         super
         @content_for = source.instance_variable_get(:@content_for).dup
@@ -126,6 +141,7 @@ module Phlex
       #
       # @api public
       # @since 0.2.0
+      #: () -> ::Hanami::Action::Request
       def request
         unless @request
           raise ::Hanami::ComponentLoadError, <<~MESSAGE
@@ -142,6 +158,7 @@ module Phlex
       #
       # @api public
       # @since 0.2.0
+      #: () -> bool
       def request?
         !!@request
       end
@@ -154,6 +171,7 @@ module Phlex
       #
       # @api public
       # @since 0.2.0
+      #: () -> ::Hanami::Slice::RoutesHelper
       def routes
         raise ::Hanami::ComponentLoadError, "the hanami-router gem is required to access routes" unless @routes
 
@@ -166,12 +184,14 @@ module Phlex
       #
       # @api public
       # @since 0.2.0
+      #: () -> ::Hanami::Action::Request::Session
       def session
         request.session
       end
 
       private
 
+      #: () -> String
       def assets_hint
         if ::Hanami.bundled?("hanami-assets")
           "Have you put files into your assets directory?"

@@ -5,35 +5,35 @@ module Phlex
     class Context
       extend ::Hanami::SliceConfigurable
 
-      def self.configure_for_slice: (untyped slice) -> untyped
+      def self.configure_for_slice: (singleton(::Hanami::Slice)) -> void
 
-      attr_reader inflector: untyped
+      attr_reader inflector: Dry::Inflector
 
-      def initialize: (?inflector: untyped, ?routes: untyped, ?assets: untyped, ?request: untyped, ?i18n: untyped, **untyped) -> untyped
+      def initialize: (?inflector: Dry::Inflector?, ?routes: ::Hanami::Slice::RoutesHelper?, ?assets: ::Hanami::Assets?, ?request: ::Hanami::Action::Request?, ?i18n: ::Hanami::Providers::I18n::Backend?, **untyped) -> void
 
-      def assets: () -> untyped
+      def assets: () -> ::Hanami::Assets
 
-      def content_for: (untyped key, ?untyped value) -> untyped
+      def content_for: (Symbol, ?String?) ?{ () -> String } -> String?
 
-      def csrf_token: () -> untyped
+      def csrf_token: () -> String?
 
-      def flash: () -> untyped
+      def flash: () -> ::Hanami::Action::Flash
 
-      def i18n: () -> untyped
+      def i18n: () -> ::Hanami::Providers::I18n::Backend
 
-      def initialize_copy: (untyped source) -> untyped
+      def initialize_copy: (self) -> void
 
-      def request: () -> untyped
+      def request: () -> ::Hanami::Action::Request
 
-      def request?: () -> untyped
+      def request?: () -> bool
 
-      def routes: () -> untyped
+      def routes: () -> ::Hanami::Slice::RoutesHelper
 
-      def session: () -> untyped
+      def session: () -> ::Hanami::Action::Request::Session
 
       private
 
-      def assets_hint: () -> untyped
+      def assets_hint: () -> String
     end
   end
 end

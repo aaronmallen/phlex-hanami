@@ -3,7 +3,7 @@
 module Phlex
   module Hanami
     class MailerViewError < Error
-      def initialize: (untyped mailer_class, untyped view_class) -> untyped
+      def initialize: (singleton(::Hanami::Mailer), singleton(::Phlex::SGML)) -> void
     end
   end
 end

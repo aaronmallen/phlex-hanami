@@ -3,17 +3,17 @@
 module Phlex
   module Hanami
     class SliceConfigured < Module
-      attr_reader slice: untyped
+      attr_reader slice: singleton(::Hanami::Slice)
 
-      def initialize: (untyped slice) -> untyped
+      def initialize: (singleton(::Hanami::Slice)) -> void
 
-      def extended: (untyped _klass) -> untyped
+      def extended: (singleton(::Phlex::SGML) | singleton(::Hanami::Mailer)) -> void
 
-      def inspect: () -> untyped
+      def inspect: () -> String
 
       private
 
-      def define_slice: () -> untyped
+      def define_slice: () -> void
     end
   end
 end

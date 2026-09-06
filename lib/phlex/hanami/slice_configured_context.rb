@@ -16,10 +16,11 @@ module Phlex
       #
       # @api private
       # @since 0.2.0
-      attr_reader :slice
+      attr_reader :slice #: singleton(::Hanami::Slice)
 
       # @api private
       # @since 0.2.0
+      #: (singleton(::Hanami::Slice)) -> void
       def initialize(slice)
         super()
         @slice = slice
@@ -27,12 +28,14 @@ module Phlex
 
       # @api private
       # @since 0.2.0
+      #: (singleton(Context)) -> void
       def extended(_context_class)
         define_new
       end
 
       # @api private
       # @since 0.2.0
+      #: () -> String
       def inspect
         "#<#{self.class.name}[#{slice.name}]>"
       end
@@ -40,6 +43,7 @@ module Phlex
       private
 
       # Defines a `.new` that resolves the slice's components and passes them to `#initialize`.
+      #: () -> void
       def define_new
         dependencies = method(:dependencies)
 
@@ -50,18 +54,22 @@ module Phlex
 
       # The slice components a context is injected with, resolved fresh for each context so that
       # a container which does not memoize still hands out working objects.
+      #: () -> Hash[Symbol, untyped]
       def dependencies
         { assets: resolve_assets, i18n: resolve_i18n, inflector: slice.inflector, routes: resolve_routes }
       end
 
+      #: () -> ::Hanami::Assets?
       def resolve_assets
         slice["assets"] if slice.key?("assets")
       end
 
+      #: () -> ::Hanami::Providers::I18n::Backend?
       def resolve_i18n
         slice["i18n"] if slice.key?("i18n")
       end
 
+      #: () -> ::Hanami::Slice::RoutesHelper?
       def resolve_routes
         slice["routes"] if slice.key?("routes")
       end

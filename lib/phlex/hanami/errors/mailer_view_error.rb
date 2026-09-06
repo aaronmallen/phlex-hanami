@@ -12,6 +12,7 @@ module Phlex
     class MailerViewError < Error
       # @api private
       # @since 0.2.0
+      #: (singleton(::Hanami::Mailer), singleton(::Phlex::SGML)) -> void
       def initialize(mailer_class, view_class)
         super(<<~MESSAGE)
           #{mailer_class} is paired with #{view_class}, which is not a mail view.
