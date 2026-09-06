@@ -29,6 +29,11 @@ Guides for the parts of phlex-hanami, in the order most people meet them. The
 
   Phlex views for hanami-mailer, the mail layout convention, and the plain text part of a message.
 
+- [Testing](testing.md)
+
+  Rendering a view or component in a test, building a context, and faking a request for the session, flash and
+  CSRF cases. Wired up for RSpec, and a module to include anywhere else.
+
 - [How it works](how-it-works.md)
 
   What the gem installs into Hanami and why. Read this before changing the gem, or when something surprises you.
