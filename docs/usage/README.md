@@ -20,6 +20,11 @@ Guides for the parts of phlex-hanami, in the order most people meet them. The
 
   Hanami's helper library, why it is opt in, how escaping works, and translations with relative keys.
 
+- [Responses](responses.md)
+
+  Where the content type comes from, what happens when a JSON action shares a name with a view, `HEAD` requests,
+  and how an action opts out of auto rendering.
+
 - [Mailers](mailers.md)
 
   Phlex views for hanami-mailer, the mail layout convention, and the plain text part of a message.

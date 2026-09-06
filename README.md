@@ -112,6 +112,7 @@ end
 - [Layouts](docs/usage/layouts.md): the slice convention, per view overrides and opting out
 - [View context](docs/usage/view-context.md): routes, assets, `content_for`, flash, session and request
 - [Helpers](docs/usage/helpers.md): Hanami's helper library, escaping and translations
+- [Responses](docs/usage/responses.md): content types, JSON actions, `HEAD` requests and opting out of auto render
 - [Mailers](docs/usage/mailers.md): Phlex views for hanami-mailer, and the plain text part
 - [How it works](docs/usage/how-it-works.md): what the gem installs, and why each piece is there
 
@@ -120,7 +121,7 @@ end
 Before 0.2.0:
 
 - [ ] A component base class and `Phlex::Kit` conventions for everything below a view
-- [ ] Response format handling, and a documented way to opt out of auto render
+- [x] Response format handling, and a documented way to opt out of auto render
 - [ ] RSpec support for testing Phlex views in application suites
 - [ ] RBS signatures for the public API
 
