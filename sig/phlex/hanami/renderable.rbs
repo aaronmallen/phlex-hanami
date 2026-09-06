@@ -3,71 +3,71 @@
 module Phlex
   module Hanami
     module Renderable
-      KEYWORD_TYPES: untyped
+      KEYWORD_TYPES: Array[Symbol]
 
-      UNSET: untyped
+      UNSET: Object
 
-      def self.included: (untyped view_class) -> untyped
+      def self.included: (singleton(::Phlex::SGML)) -> void
 
       module I18nOverrides
         private
 
-        def _resolve_i18n_key: (untyped key) -> untyped
+        def _resolve_i18n_key: (String | Symbol) -> (String | Symbol)
 
-        def i18n_key_base: () -> untyped
+        def i18n_key_base: () -> String?
       end
 
       module ClassMethods
-        def call: (?context: untyped, **untyped input) -> untyped
+        def call: (?context: (::Hanami::View::Context | Context)?, **untyped) -> String
 
-        def configure_for_slice: (untyped slice) -> untyped
+        def configure_for_slice: (singleton(::Hanami::Slice)) -> void
 
-        def configured_layout: () -> untyped
+        def configured_layout: () -> (singleton(::Phlex::SGML) | Object | nil)
 
-        def layout: (?untyped layout_class) -> untyped
+        def layout: (?singleton(::Phlex::SGML)?) -> singleton(::Phlex::SGML)?
 
-        def slice: () -> untyped
+        def slice: () -> singleton(::Hanami::Slice)?
 
         private
 
-        def accepted_input: (untyped input) -> untyped
+        def accepted_input: (Hash[Symbol, untyped]) -> Hash[Symbol, untyped]
 
-        def default_layout: () -> untyped
+        def default_layout: () -> singleton(::Phlex::SGML)?
       end
 
-      def asset_url: (untyped source) -> untyped
+      def asset_url: (String) -> String
 
-      def assets: () -> untyped
+      def assets: () -> ::Hanami::Assets
 
-      def content_for: () -> untyped
+      def content_for: (Symbol, ?String?) ?{ () -> String } -> String?
 
-      def csrf_token: () -> untyped
+      def csrf_token: () -> String?
 
-      def flash: () -> untyped
+      def flash: () -> ::Hanami::Action::Flash
 
-      def hanami_context: () -> untyped
+      def hanami_context: () -> (::Hanami::View::Context | Context)
 
-      def hanami_context?: () -> untyped
+      def hanami_context?: () -> bool
 
-      def i18n: () -> untyped
+      def i18n: () -> ::Hanami::Providers::I18n::Backend
 
-      def path: () -> untyped
+      def path: (*untyped, **untyped) -> String
 
-      def request: () -> untyped
+      def request: () -> ::Hanami::Action::Request
 
-      def request?: () -> untyped
+      def request?: () -> bool
 
-      def routes: () -> untyped
+      def routes: () -> ::Hanami::Slice::RoutesHelper
 
-      def session: () -> untyped
+      def session: () -> ::Hanami::Action::Request::Session
 
-      def slice: () -> untyped
+      def slice: () -> singleton(::Hanami::Slice)?
 
-      def url: () -> untyped
+      def url: (*untyped, **untyped) -> String
 
       private
 
-      def _context: () -> untyped
+      def _context: () -> (::Hanami::View::Context | Context)
     end
   end
 end

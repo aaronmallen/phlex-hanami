@@ -22,17 +22,18 @@ module Phlex
       #
       # @api private
       # @since 0.2.0
-      KEYWORD_TYPES = %i[key keyreq].freeze
+      KEYWORD_TYPES = %i[key keyreq].freeze #: Array[Symbol]
 
       # Distinguishes "no layout was configured" from "a layout of `nil` was configured", which is
       # how a view opts out.
       #
       # @api private
       # @since 0.2.0
-      UNSET = ::Object.new.freeze
+      UNSET = ::Object.new.freeze #: Object
 
       # @api private
       # @since 0.2.0
+      #: (singleton(::Phlex::SGML)) -> void
       def self.included(view_class)
         view_class.extend(::Hanami::SliceConfigurable)
         view_class.extend(ClassMethods)
@@ -60,6 +61,7 @@ module Phlex
         #
         # Hanami's own implementation uses `_context.current_template_name`, which is hanami-view's
         # template stack and has no meaning for a Phlex view.
+        #: (String | Symbol) -> (String | Symbol)
         def _resolve_i18n_key(key)
           return key unless key.to_s.start_with?(".")
 
@@ -75,6 +77,7 @@ module Phlex
 
         # The view's container key, dotted: `MyApp::Views::Posts::Index` in the app slice becomes
         # `posts.index`. Nil for an anonymous view, or one outside any slice.
+        #: () -> String?
         def i18n_key_base
           view_slice = self.class.slice
           name = self.class.name
@@ -111,6 +114,7 @@ module Phlex
         #
         # @api public
         # @since 0.2.0
+        #: (?context: (::Hanami::View::Context | Context)?, **untyped) -> String
         def call(context: nil, **input)
           phlex_context = { CONTEXT_KEY => context }
           body = new(**accepted_input(input)).call(context: phlex_context)
@@ -123,6 +127,7 @@ module Phlex
 
         # @api private
         # @since 0.2.0
+        #: (singleton(::Hanami::Slice)) -> void
         def configure_for_slice(slice)
           extend SliceConfigured.new(slice)
         end
@@ -132,6 +137,7 @@ module Phlex
         #
         # @api private
         # @since 0.2.0
+        #: () -> (singleton(::Phlex::SGML) | Object | nil)
         def configured_layout
           return @layout if defined?(@layout)
           return superclass.configured_layout if superclass.respond_to?(:configured_layout)
@@ -165,6 +171,7 @@ module Phlex
         #
         # @api public
         # @since 0.2.0
+        #: (?singleton(::Phlex::SGML)?) -> singleton(::Phlex::SGML)?
         def layout(layout_class = UNSET)
           unless UNSET.equal?(layout_class)
             @layout = layout_class
@@ -181,6 +188,7 @@ module Phlex
         #
         # @api public
         # @since 0.2.0
+        #: () -> singleton(::Hanami::Slice)?
         def slice
           nil
         end
@@ -191,6 +199,7 @@ module Phlex
         #
         # A view whose initializer takes `**` opts out and receives everything, request params
         # included.
+        #: (Hash[Symbol, untyped]) -> Hash[Symbol, untyped]
         def accepted_input(input)
           parameters = instance_method(:initialize).parameters
           return input if parameters.any? { |type, _| type == :keyrest }
@@ -200,6 +209,7 @@ module Phlex
 
         # The slice's conventional layout: `Views::Layout` in the slice's namespace, if it defines
         # one. Resolved on each call rather than memoized, so code reloading is not defeated.
+        #: () -> singleton(::Phlex::SGML)?
         def default_layout
           return nil unless slice
           return nil unless slice.namespace.const_defined?(:Views, false)
@@ -220,6 +230,7 @@ module Phlex
       #
       # @api public
       # @since 0.2.0
+      #: (String) -> String
       def asset_url(source)
         assets[source].url
       end
@@ -228,6 +239,7 @@ module Phlex
       #
       # @api public
       # @since 0.2.0
+      #: () -> ::Hanami::Assets
       def assets
         hanami_context.assets
       end
@@ -236,6 +248,7 @@ module Phlex
       #
       # @api public
       # @since 0.2.0
+      #: (Symbol, ?String?) ?{ () -> String } -> String?
       def content_for(...)
         hanami_context.content_for(...)
       end
@@ -246,6 +259,7 @@ module Phlex
       #
       # @api public
       # @since 0.2.0
+      #: () -> String?
       def csrf_token
         hanami_context.csrf_token
       end
@@ -254,6 +268,7 @@ module Phlex
       #
       # @api public
       # @since 0.2.0
+      #: () -> ::Hanami::Action::Flash
       def flash
         hanami_context.flash
       end
@@ -269,6 +284,7 @@ module Phlex
       #
       # @api public
       # @since 0.2.0
+      #: () -> (::Hanami::View::Context | Context)
       def hanami_context
         context[CONTEXT_KEY] || raise(MissingContextError, self.class)
       end
@@ -279,6 +295,7 @@ module Phlex
       #
       # @api public
       # @since 0.2.0
+      #: () -> bool
       def hanami_context?
         !context[CONTEXT_KEY].nil?
       end
@@ -287,6 +304,7 @@ module Phlex
       #
       # @api public
       # @since 0.2.0
+      #: () -> ::Hanami::Providers::I18n::Backend
       def i18n
         hanami_context.i18n
       end
@@ -300,6 +318,7 @@ module Phlex
       #
       # @api public
       # @since 0.2.0
+      #: (*untyped, **untyped) -> String
       def path(...)
         routes.path(...)
       end
@@ -310,6 +329,7 @@ module Phlex
       #
       # @api public
       # @since 0.2.0
+      #: () -> ::Hanami::Action::Request
       def request
         hanami_context.request
       end
@@ -320,6 +340,7 @@ module Phlex
       #
       # @api public
       # @since 0.2.0
+      #: () -> bool
       def request?
         hanami_context? && hanami_context.request?
       end
@@ -330,6 +351,7 @@ module Phlex
       #
       # @api public
       # @since 0.2.0
+      #: () -> ::Hanami::Slice::RoutesHelper
       def routes
         hanami_context.routes
       end
@@ -338,6 +360,7 @@ module Phlex
       #
       # @api public
       # @since 0.2.0
+      #: () -> ::Hanami::Action::Request::Session
       def session
         hanami_context.session
       end
@@ -348,6 +371,7 @@ module Phlex
       #
       # @api public
       # @since 0.2.0
+      #: () -> singleton(::Hanami::Slice)?
       def slice
         self.class.slice
       end
@@ -364,6 +388,7 @@ module Phlex
       #
       # @api public
       # @since 0.2.0
+      #: (*untyped, **untyped) -> String
       def url(...)
         routes.url(...).to_s
       end
@@ -371,6 +396,7 @@ module Phlex
       private
 
       # Hanami's helper modules reach for the view context under this name.
+      #: () -> (::Hanami::View::Context | Context)
       def _context
         hanami_context
       end

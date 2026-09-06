@@ -23,8 +23,9 @@ RSpec.describe Phlex::Hanami::Renderable do
     end
 
     it "does not pass the Hanami context as an initializer keyword" do
-      expect { TestApp::Views::Posts::Anything.call(context: :ctx) }
-        .not_to raise_error
+      html = TestApp::Views::Posts::Anything.call(context: Phlex::Hanami::Context.new)
+
+      expect(html).not_to include("context=")
     end
 
     it "renders the same class more than once" do
