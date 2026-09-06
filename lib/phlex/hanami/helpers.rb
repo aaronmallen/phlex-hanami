@@ -46,7 +46,7 @@ module Phlex
       OVERRIDDEN_METHODS = {
         raw: Phlex::SGML.instance_method(:raw),
         tag: Phlex::HTML.instance_method(:tag),
-      }.freeze
+      }.freeze #: Hash[Symbol, UnboundMethod]
 
       # Phlex's implementations, mixed back in over Hanami's.
       #
@@ -56,10 +56,11 @@ module Phlex
         OVERRIDDEN_METHODS.each do |name, method|
           define_method(name) { |*args, **options, &block| method.bind_call(self, *args, **options, &block) }
         end
-      end
+      end #: Module
 
       # @api private
       # @since 0.2.0
+      #: (singleton(::Phlex::SGML)) -> void
       def self.included(view_class)
         view_class.include(::Hanami::Extensions::View::StandardHelpers)
         view_class.include(PhlexMethods)

@@ -3,11 +3,11 @@
 module Phlex
   module Hanami
     module Helpers
-      OVERRIDDEN_METHODS: untyped
+      OVERRIDDEN_METHODS: Hash[Symbol, UnboundMethod]
 
-      PhlexMethods: untyped
+      PhlexMethods: Module
 
-      def self.included: (untyped view_class) -> untyped
+      def self.included: (singleton(::Phlex::SGML)) -> void
     end
   end
 end

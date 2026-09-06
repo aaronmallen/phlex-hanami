@@ -4,43 +4,43 @@ module Phlex
   module Hanami
     module Mailer
       class Text
-        BLOCK_ELEMENTS: untyped
+        BLOCK_ELEMENTS: Array[String]
 
-        BLOCK_PATTERN: ::Regexp
+        BLOCK_PATTERN: Regexp
 
-        ENTITIES: untyped
+        ENTITIES: Hash[String, String]
 
-        ENTITY_PATTERN: ::Regexp
+        ENTITY_PATTERN: Regexp
 
-        LINK_CLOSE: ::String
+        LINK_CLOSE: String
 
-        LINK_OPEN: ::String
+        LINK_OPEN: String
 
-        def self.call: (untyped html) -> untyped
+        def self.call: (_ToS) -> String
 
-        private def self.anchor_text: (untyped attributes, untyped inner) -> untyped
+        private def self.anchor_text: (String, String) -> String
 
-        private def self.body_of: (untyped html) -> untyped
+        private def self.body_of: (String) -> String
 
-        private def self.expand_anchors: (untyped html) -> untyped
+        private def self.expand_anchors: (String) -> String
 
-        private def self.expand_blocks: (untyped html) -> untyped
+        private def self.expand_blocks: (String) -> String
 
-        private def self.expand_breaks: (untyped html) -> untyped
+        private def self.expand_breaks: (String) -> String
 
-        private def self.expand_list_items: (untyped html) -> untyped
+        private def self.expand_list_items: (String) -> String
 
-        private def self.href_in: (untyped attributes) -> untyped
+        private def self.href_in: (String) -> String
 
-        private def self.restore_links: (untyped text) -> untyped
+        private def self.restore_links: (String) -> String
 
-        private def self.strip_hidden_elements: (untyped html) -> untyped
+        private def self.strip_hidden_elements: (String) -> String
 
-        private def self.strip_tags: (untyped html) -> untyped
+        private def self.strip_tags: (String) -> String
 
-        private def self.tidy: (untyped text) -> untyped
+        private def self.tidy: (String) -> String
 
-        private def self.unescape: (untyped text) -> untyped
+        private def self.unescape: (String) -> String
       end
     end
   end

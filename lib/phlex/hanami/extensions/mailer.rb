@@ -21,6 +21,7 @@ module Phlex
         #
         # @api private
         # @since 0.2.0
+        #: () -> void
         def self.install
           ::Hanami::Mailer.prepend(self)
           ::Hanami::Mailer.singleton_class.prepend(ClassMethods)
@@ -31,6 +32,7 @@ module Phlex
         module ClassMethods
           # @api private
           # @since 0.2.0
+          #: (singleton(::Hanami::Slice)) -> void
           def configure_for_slice(slice)
             super
             extend SliceConfigured.new(slice)
@@ -49,6 +51,7 @@ module Phlex
           #
           # @api private
           # @since 0.2.0
+          #: () -> singleton(::Phlex::SGML)?
           def phlex_view
             mailer_slice = slice
             return nil unless mailer_slice && name
@@ -69,12 +72,14 @@ module Phlex
           #
           # @api private
           # @since 0.2.0
+          #: () -> singleton(::Hanami::Slice)?
           def slice
             nil
           end
 
           private
 
+          #: (singleton(::Hanami::Slice)) -> String
           def view_name(mailer_slice)
             mailer_slice.inflector
               .underscore(name)
@@ -93,6 +98,7 @@ module Phlex
         #
         # @api private
         # @since 0.2.0
+        #: () -> untyped
         def view
           @view || self.class.phlex_view || super
         end

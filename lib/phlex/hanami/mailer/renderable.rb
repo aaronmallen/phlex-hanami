@@ -22,6 +22,7 @@ module Phlex
       module Renderable
         # @api private
         # @since 0.2.0
+        #: (singleton(::Phlex::SGML)) -> void
         def self.included(view_class)
           view_class.include(::Phlex::Hanami::Renderable)
 
@@ -48,6 +49,7 @@ module Phlex
           #
           # @api public
           # @since 0.2.0
+          #: (?context: (::Hanami::View::Context | Context)?, ?format: Symbol | String, **untyped) -> String
           def call(context: nil, format: :html, **input)
             html = super(context: context || mail_context, **input)
             return html unless format.to_s == "text"
@@ -62,6 +64,7 @@ module Phlex
           # The web layout is the wrong one for an email — it carries the stylesheets, scripts and
           # page chrome no mail client wants — so mail looks for its own, and renders without a
           # layout when the slice has none.
+          #: () -> singleton(::Phlex::SGML)?
           def default_layout
             return nil unless slice
             return nil unless slice.namespace.const_defined?(:Views, false)
@@ -78,6 +81,7 @@ module Phlex
           # The same class an action would be given, so a view reads the same in both places. What
           # a request would have filled in — `request`, `session`, `flash`, `csrf_token` — is
           # missing, and the context says so when a view reaches for it.
+          #: () -> (::Hanami::View::Context | Context)?
           def mail_context
             return nil unless slice
 
@@ -99,6 +103,7 @@ module Phlex
           #
           # @api public
           # @since 0.2.0
+          #: (*untyped, **untyped) -> bot
           def path(*, **)
             raise RelativePathError, self.class
           end
@@ -119,6 +124,7 @@ module Phlex
           #
           # @api public
           # @since 0.2.0
+          #: (String) -> String
           def text_body(html)
             Text.call(html)
           end

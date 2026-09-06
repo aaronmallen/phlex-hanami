@@ -63,6 +63,11 @@ module Phlex
         #
         # @api public
         # @since 0.2.0
+        #: (
+        #    ::Phlex::SGML,
+        #    ?context: (::Hanami::View::Context | Context)?,
+        #    ?request: ::Hanami::Action::Request?
+        #  ) ?{ (?) -> untyped } -> String
         def render(view, context: nil, request: nil, &)
           context ||= view_context(slice: slice_for(view), request: request)
 
@@ -87,6 +92,11 @@ module Phlex
         #
         # @api public
         # @since 0.2.0
+        #: (
+        #    ?slice: singleton(::Hanami::Slice)?,
+        #    ?request: ::Hanami::Action::Request?,
+        #    **untyped
+        #  ) -> (::Hanami::View::Context | Context)
         def view_context(slice: nil, request: nil, **)
           slice ||= ::Hanami.app if ::Hanami.app?
           context_class = slice ? Extensions::Slice.view_context_class(slice) : Context
@@ -112,6 +122,13 @@ module Phlex
         #
         # @api public
         # @since 0.2.0
+        #: (
+        #    ?String,
+        #    ?csrf_token: String?,
+        #    ?flash: Hash[Symbol | String, untyped],
+        #    ?session: Hash[Symbol | String, untyped],
+        #    **untyped
+        #  ) -> ::Hanami::Action::Request
         def view_request(path = "/", csrf_token: nil, flash: {}, session: {}, **)
           env = ::Rack::MockRequest.env_for(path, **)
           env["rack.session"] = session.transform_keys(&:to_s)
@@ -129,6 +146,7 @@ module Phlex
 
         # The slice a view belongs to. Nil for a plain Phlex class, which has no `slice` at all,
         # and for a Renderable one defined outside a slice namespace.
+        #: (::Phlex::SGML) -> singleton(::Hanami::Slice)?
         def slice_for(view)
           view.class.slice if view.class.respond_to?(:slice)
         end

@@ -21,11 +21,11 @@ module Phlex
         # @since 0.2.0
         BLOCK_ELEMENTS = %w[
           article blockquote div footer h1 h2 h3 h4 h5 h6 header hr li ol p section table td tr ul
-        ].freeze
+        ].freeze #: Array[String]
 
         # @api private
         # @since 0.2.0
-        BLOCK_PATTERN = %r{</?(?:#{BLOCK_ELEMENTS.join('|')})\b[^>]*>}i
+        BLOCK_PATTERN = %r{</?(?:#{BLOCK_ELEMENTS.join('|')})\b[^>]*>}i #: Regexp
 
         # The entities Phlex escapes, and the characters they stand for.
         #
@@ -39,22 +39,22 @@ module Phlex
           "&lt;" => "<",
           "&nbsp;" => " ",
           "&quot;" => '"',
-        }.freeze
+        }.freeze #: Hash[String, String]
 
         # @api private
         # @since 0.2.0
-        ENTITY_PATTERN = /&(?:amp|apos|gt|lt|nbsp|quot|#39);/
+        ENTITY_PATTERN = /&(?:amp|apos|gt|lt|nbsp|quot|#39);/ #: Regexp
 
         # Stand in for the angle brackets around a URL until the tags are gone, so that stripping
         # tags does not eat the link the converter has just written.
         #
         # @api private
         # @since 0.2.0
-        LINK_CLOSE = "\u0011"
+        LINK_CLOSE = "\u0011" #: String
 
         # @api private
         # @since 0.2.0
-        LINK_OPEN = "\u0010"
+        LINK_OPEN = "\u0010" #: String
 
         class << self
           # Converts rendered HTML to plain text.
@@ -65,6 +65,7 @@ module Phlex
           #
           # @api public
           # @since 0.2.0
+          #: (_ToS) -> String
           def call(html)
             text = body_of(html.to_s)
             text = strip_hidden_elements(text)
@@ -80,6 +81,7 @@ module Phlex
           private
 
           # `Label <https://example.com/path>`, or one of the two when the other adds nothing.
+          #: (String, String) -> String
           def anchor_text(attributes, inner)
             url = href_in(attributes)
             label = strip_tags(inner).gsub(/\s+/, " ").strip
@@ -89,18 +91,24 @@ module Phlex
             "#{label} #{LINK_OPEN}#{url}#{LINK_CLOSE}"
           end
 
+          #: (String) -> String
           def body_of(html) = html[%r{<body\b[^>]*>(.*?)</body>}mi, 1] || html
 
+          #: (String) -> String
           def expand_anchors(html)
             html.gsub(%r{<a\b([^>]*)>(.*?)</a>}mi) { anchor_text(Regexp.last_match(1), Regexp.last_match(2)) }
           end
 
+          #: (String) -> String
           def expand_blocks(html) = html.gsub(BLOCK_PATTERN, "\n\n")
 
+          #: (String) -> String
           def expand_breaks(html) = html.gsub(%r{<br\b[^>]*/?>}i, "\n")
 
+          #: (String) -> String
           def expand_list_items(html) = html.gsub(%r{</li\s*>}i, "").gsub(/<li\b[^>]*>/i, "\n- ")
 
+          #: (String) -> String
           def href_in(attributes)
             match = attributes.match(/\bhref\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'>]+))/i)
             return "" unless match
@@ -108,14 +116,19 @@ module Phlex
             (match[1] || match[2] || match[3]).to_s.strip
           end
 
+          #: (String) -> String
           def restore_links(text) = text.gsub(LINK_OPEN, "<").gsub(LINK_CLOSE, ">")
 
+          #: (String) -> String
           def strip_hidden_elements(html) = html.gsub(%r{<(head|style|script)\b[^>]*>.*?</\1\s*>}mi, "")
 
+          #: (String) -> String
           def strip_tags(html) = html.gsub(/<!--.*?-->/m, "").gsub(/<[^>]*>/, "")
 
+          #: (String) -> String
           def tidy(text) = text.gsub(/[ \t]+/, " ").gsub(/[ \t]+$/, "").gsub(/\n{3,}/, "\n\n").strip
 
+          #: (String) -> String
           def unescape(text) = text.gsub(ENTITY_PATTERN) { ENTITIES.fetch(Regexp.last_match(0)) }
         end
       end

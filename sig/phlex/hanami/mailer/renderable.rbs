@@ -4,22 +4,22 @@ module Phlex
   module Hanami
     module Mailer
       module Renderable
-        def self.included: (untyped view_class) -> untyped
+        def self.included: (singleton(::Phlex::SGML)) -> void
 
         module ClassMethods
-          def call: (?context: untyped, ?format: untyped, **untyped input) -> untyped
+          def call: (?context: (::Hanami::View::Context | Context)?, ?format: Symbol | String, **untyped) -> String
 
           private
 
-          def default_layout: () -> untyped
+          def default_layout: () -> singleton(::Phlex::SGML)?
 
-          def mail_context: () -> untyped
+          def mail_context: () -> (::Hanami::View::Context | Context)?
         end
 
         module MailMethods
-          def path: (*untyped, **untyped) -> untyped
+          def path: (*untyped, **untyped) -> bot
 
-          def text_body: (untyped html) -> untyped
+          def text_body: (String) -> String
         end
       end
     end

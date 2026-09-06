@@ -4,18 +4,18 @@ module Phlex
   module Hanami
     module Extensions
       module Mailer
-        def self.install: () -> untyped
+        def self.install: () -> void
 
         module ClassMethods
-          def configure_for_slice: (untyped slice) -> untyped
+          def configure_for_slice: (singleton(::Hanami::Slice)) -> void
 
-          def phlex_view: () -> untyped
+          def phlex_view: () -> singleton(::Phlex::SGML)?
 
-          def slice: () -> untyped
+          def slice: () -> singleton(::Hanami::Slice)?
 
           private
 
-          def view_name: (untyped mailer_slice) -> untyped
+          def view_name: (singleton(::Hanami::Slice)) -> String
         end
 
         def view: () -> untyped

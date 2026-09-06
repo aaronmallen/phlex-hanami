@@ -34,10 +34,11 @@ module Phlex
           else
             component.loader.call(component, *args, **kwargs)
           end
-        }
+        } #: ^(untyped, *untyped, **untyped) -> untyped
 
         # @api private
         # @since 0.2.0
+        #: (?String?) -> untyped
         def prepare(provider_name = nil)
           result = super
 
@@ -59,6 +60,7 @@ module Phlex
           #
           # @api private
           # @since 0.2.0
+          #: (singleton(::Hanami::Slice)) -> singleton(Context)?
           def define_view_context(slice)
             return if ::Hanami.bundled?("hanami-view")
 
@@ -78,6 +80,7 @@ module Phlex
           #
           # @api private
           # @since 0.2.0
+          #: (singleton(::Hanami::Slice)) -> void
           def register_phlex_components(slice)
             component_dirs = slice.container.config.component_dirs
             return if component_dirs.configured?(:instance)
@@ -95,6 +98,7 @@ module Phlex
           #
           # @api private
           # @since 0.2.0
+          #: (singleton(::Hanami::Slice)) -> (singleton(::Hanami::View::Context) | singleton(Context))
           def view_context_class(slice)
             return ::Hanami::Extensions::View::Context.context_class(slice) if ::Hanami.bundled?("hanami-view")
 
@@ -103,6 +107,7 @@ module Phlex
 
           private
 
+          #: (singleton(::Hanami::Slice)) -> Module
           def views_namespace(slice)
             if slice.namespace.const_defined?(:Views, false)
               slice.namespace.const_get(:Views, false)
