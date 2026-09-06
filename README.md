@@ -124,7 +124,7 @@ Before 0.2.0:
 - [ ] A component base class and `Phlex::Kit` conventions for everything below a view
 - [x] Response format handling, and a documented way to opt out of auto render
 - [x] RSpec support for testing Phlex views in application suites
-- [ ] RBS signatures for the public API
+- [x] RBS signatures for the public API
 
 After 0.2.0:
 
@@ -136,11 +136,13 @@ After 0.2.0:
 This project uses [mise](https://mise.jdx.dev) for tools and tasks. Run `mise tasks` to see them all.
 
 ```sh
-mise run setup    # Install tools and dependencies
-mise run test     # Run the test suite
-mise run format   # Format every file
-mise run lint     # Lint every file
+mise run setup       # Install tools and dependencies
+mise run test        # Run the test suite, with the RBS signatures checked as it goes
+mise run format      # Format every file
+mise run lint        # Lint every file
 ```
+
+[CONTRIBUTING](.github/CONTRIBUTING.md) covers the rest, including how the signatures are generated.
 
 ## License
 
