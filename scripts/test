@@ -4,4 +4,12 @@
 
 set -e
 
-bundle exec rspec --require spec_helper "$@"
+# The suite runs under RBS's runtime checker, so every call into a `Phlex::Hanami` method is checked
+# against its signature as the specs exercise it. `lint:rbs` only proves the signatures parse and
+# resolve; this is what proves they describe the code, and a wrong one fails the suite.
+#
+# `--double-suite rspec` keeps the checker away from RSpec's own doubles.
+bundle exec rbs -r uri -I sig test \
+  --target "Phlex::Hanami::*" \
+  --double-suite rspec \
+  rspec --require spec_helper "$@"
