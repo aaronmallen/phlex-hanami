@@ -16,6 +16,9 @@ module TestApp
     get "/posts/-/boxed", to: "posts.boxed"
     get "/posts/-/translated", to: "posts.translated"
     get "/posts/-/form", to: "posts.form"
+    get "/posts/-/feed", to: "posts.feed"
+    get "/posts/-/opted-out", to: "posts.opted_out"
+    get "/posts/-/conditional", to: "posts.conditional"
     get "/posts/-/escaping", to: "posts.escaping"
 
     slice :admin, at: "/admin" do
