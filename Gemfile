@@ -13,6 +13,7 @@ group :development, :test do
   gem "hanami-mailer", "~> 3.0"
   gem "hanami-router", "~> 3.0"
   gem "i18n", "~> 1.14"
+  gem "minitest", "~> 5"
   gem "rack", "~> 3.0"
   gem "rack-test", "~> 2.0"
   gem "rspec", "~> 3"
