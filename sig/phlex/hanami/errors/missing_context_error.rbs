@@ -1,0 +1,9 @@
+# Generated from lib/phlex/hanami/errors/missing_context_error.rb with RBS::Inline
+
+module Phlex
+  module Hanami
+    class MissingContextError < Error
+      def initialize: (untyped view_class) -> untyped
+    end
+  end
+end

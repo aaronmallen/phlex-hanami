@@ -1,0 +1,19 @@
+# Generated from lib/phlex/hanami/testing.rb with RBS::Inline
+
+module Phlex
+  module Hanami
+    module Testing
+      module ViewHelpers
+        def render: (untyped view, ?context: untyped, ?request: untyped) ?{ (?) -> untyped } -> untyped
+
+        def view_context: (?slice: untyped, ?request: untyped, **untyped) -> untyped
+
+        def view_request: (?untyped path, ?csrf_token: untyped, ?flash: untyped, ?session: untyped, **untyped) -> untyped
+
+        private
+
+        def slice_for: (untyped view) -> untyped
+      end
+    end
+  end
+end

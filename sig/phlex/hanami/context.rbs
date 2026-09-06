@@ -1,0 +1,39 @@
+# Generated from lib/phlex/hanami/context.rb with RBS::Inline
+
+module Phlex
+  module Hanami
+    class Context
+      extend ::Hanami::SliceConfigurable
+
+      def self.configure_for_slice: (untyped slice) -> untyped
+
+      attr_reader inflector: untyped
+
+      def initialize: (?inflector: untyped, ?routes: untyped, ?assets: untyped, ?request: untyped, ?i18n: untyped, **untyped) -> untyped
+
+      def assets: () -> untyped
+
+      def content_for: (untyped key, ?untyped value) -> untyped
+
+      def csrf_token: () -> untyped
+
+      def flash: () -> untyped
+
+      def i18n: () -> untyped
+
+      def initialize_copy: (untyped source) -> untyped
+
+      def request: () -> untyped
+
+      def request?: () -> untyped
+
+      def routes: () -> untyped
+
+      def session: () -> untyped
+
+      private
+
+      def assets_hint: () -> untyped
+    end
+  end
+end

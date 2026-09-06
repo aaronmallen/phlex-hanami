@@ -1,2 +1,1 @@
-# Signatures mirror the files under `lib`. Declare a type here when you add the
-# code it describes, keeping the path the same: `lib/foo/bar.rb` -> `sig/foo/bar.rbs`.
+# Generated from lib/phlex-hanami.rb with RBS::Inline

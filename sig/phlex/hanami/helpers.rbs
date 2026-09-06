@@ -1,0 +1,13 @@
+# Generated from lib/phlex/hanami/helpers.rb with RBS::Inline
+
+module Phlex
+  module Hanami
+    module Helpers
+      OVERRIDDEN_METHODS: untyped
+
+      PhlexMethods: untyped
+
+      def self.included: (untyped view_class) -> untyped
+    end
+  end
+end

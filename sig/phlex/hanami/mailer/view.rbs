@@ -1,0 +1,11 @@
+# Generated from lib/phlex/hanami/mailer/view.rb with RBS::Inline
+
+module Phlex
+  module Hanami
+    module Mailer
+      class View < Phlex::HTML
+        include Renderable
+      end
+    end
+  end
+end

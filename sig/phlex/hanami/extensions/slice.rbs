@@ -1,0 +1,21 @@
+# Generated from lib/phlex/hanami/extensions/slice.rb with RBS::Inline
+
+module Phlex
+  module Hanami
+    module Extensions
+      module Slice
+        COMPONENT_INSTANCE: untyped
+
+        def prepare: (?untyped provider_name) -> untyped
+
+        def self.define_view_context: (untyped slice) -> untyped
+
+        def self.register_phlex_components: (untyped slice) -> untyped
+
+        def self.view_context_class: (untyped slice) -> untyped
+
+        private def self.views_namespace: (untyped slice) -> untyped
+      end
+    end
+  end
+end

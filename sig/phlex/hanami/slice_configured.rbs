@@ -1,0 +1,19 @@
+# Generated from lib/phlex/hanami/slice_configured.rb with RBS::Inline
+
+module Phlex
+  module Hanami
+    class SliceConfigured < Module
+      attr_reader slice: untyped
+
+      def initialize: (untyped slice) -> untyped
+
+      def extended: (untyped _klass) -> untyped
+
+      def inspect: () -> untyped
+
+      private
+
+      def define_slice: () -> untyped
+    end
+  end
+end

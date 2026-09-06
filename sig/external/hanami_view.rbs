@@ -1,0 +1,9 @@
+# hanami-view is optional. When it is bundled Hanami builds the view context from its class rather
+# than from ours, so a view's context is one or the other and every signature naming a context says
+# so. Declaring the class here costs nothing when the gem is absent: RBS is never loaded at runtime.
+module Hanami
+  class View
+    class Context
+    end
+  end
+end

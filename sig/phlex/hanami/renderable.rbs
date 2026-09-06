@@ -1,0 +1,73 @@
+# Generated from lib/phlex/hanami/renderable.rb with RBS::Inline
+
+module Phlex
+  module Hanami
+    module Renderable
+      KEYWORD_TYPES: untyped
+
+      UNSET: untyped
+
+      def self.included: (untyped view_class) -> untyped
+
+      module I18nOverrides
+        private
+
+        def _resolve_i18n_key: (untyped key) -> untyped
+
+        def i18n_key_base: () -> untyped
+      end
+
+      module ClassMethods
+        def call: (?context: untyped, **untyped input) -> untyped
+
+        def configure_for_slice: (untyped slice) -> untyped
+
+        def configured_layout: () -> untyped
+
+        def layout: (?untyped layout_class) -> untyped
+
+        def slice: () -> untyped
+
+        private
+
+        def accepted_input: (untyped input) -> untyped
+
+        def default_layout: () -> untyped
+      end
+
+      def asset_url: (untyped source) -> untyped
+
+      def assets: () -> untyped
+
+      def content_for: () -> untyped
+
+      def csrf_token: () -> untyped
+
+      def flash: () -> untyped
+
+      def hanami_context: () -> untyped
+
+      def hanami_context?: () -> untyped
+
+      def i18n: () -> untyped
+
+      def path: () -> untyped
+
+      def request: () -> untyped
+
+      def request?: () -> untyped
+
+      def routes: () -> untyped
+
+      def session: () -> untyped
+
+      def slice: () -> untyped
+
+      def url: () -> untyped
+
+      private
+
+      def _context: () -> untyped
+    end
+  end
+end

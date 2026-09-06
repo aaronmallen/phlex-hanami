@@ -1,0 +1,27 @@
+# Generated from lib/phlex/hanami/mailer/renderable.rb with RBS::Inline
+
+module Phlex
+  module Hanami
+    module Mailer
+      module Renderable
+        def self.included: (untyped view_class) -> untyped
+
+        module ClassMethods
+          def call: (?context: untyped, ?format: untyped, **untyped input) -> untyped
+
+          private
+
+          def default_layout: () -> untyped
+
+          def mail_context: () -> untyped
+        end
+
+        module MailMethods
+          def path: (*untyped, **untyped) -> untyped
+
+          def text_body: (untyped html) -> untyped
+        end
+      end
+    end
+  end
+end

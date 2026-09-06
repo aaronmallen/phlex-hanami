@@ -1,0 +1,27 @@
+# Generated from lib/phlex/hanami/slice_configured_context.rb with RBS::Inline
+
+module Phlex
+  module Hanami
+    class SliceConfiguredContext < Module
+      attr_reader slice: untyped
+
+      def initialize: (untyped slice) -> untyped
+
+      def extended: (untyped _context_class) -> untyped
+
+      def inspect: () -> untyped
+
+      private
+
+      def define_new: () -> untyped
+
+      def dependencies: () -> untyped
+
+      def resolve_assets: () -> untyped
+
+      def resolve_i18n: () -> untyped
+
+      def resolve_routes: () -> untyped
+    end
+  end
+end
