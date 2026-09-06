@@ -36,7 +36,9 @@ Zeitwerk::Loader.new.tap do |loader|
   loader.tag = "phlex-hanami"
   loader.push_dir(lib_dir, namespace: Phlex::Hanami)
   loader.collapse(File.join(lib_dir, "errors"))
-  loader.ignore(__FILE__)
+  # Test support is opt in, so nothing here should autoload it. `rspec.rb` also has no constant of
+  # its own for Zeitwerk to hang an autoload on.
+  loader.ignore(__FILE__, File.join(lib_dir, "rspec.rb"), File.join(lib_dir, "testing.rb"))
 end.setup
 
 # Installs the integration. Referencing the constant is what autoloads it, so this cannot move into
