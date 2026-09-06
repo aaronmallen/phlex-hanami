@@ -4,4 +4,5 @@
 
 set -e
 
-bundle exec rbs -I sig validate
+# `uri` for `Hanami::Slice::RoutesHelper#url`, which is the only stdlib type the signatures name.
+bundle exec rbs -r uri -I sig validate

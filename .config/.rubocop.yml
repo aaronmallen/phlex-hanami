@@ -31,6 +31,10 @@ Lint/MissingSuper:
 Style/ExplicitBlockArgument:
   Enabled: false
 
+# rbs-inline annotations are `#:` comments, which this cop reads as a missing space.
+Layout/LeadingCommentSpace:
+  AllowRBSInlineAnnotation: true
+
 Layout/LineEndStringConcatenationIndentation:
   EnforcedStyle: indented
 

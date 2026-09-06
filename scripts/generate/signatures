@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+#MISE description="Generate RBS signatures from the inline annotations in lib"
+#MISE alias=["g:sig", "g:signatures", "generate:sig"]
+
+set -e
+
+bundle exec rbs-inline --opt-out --output=sig lib
+
+# The docs live in `lib`. rbs-inline copies them into the signatures, where they are a second copy
+# to keep in step with the first, so strip every comment but the generated-from header.
+find sig -name "*.rbs" -not -path "sig/external/*" | while IFS= read -r file; do
+  awk '
+    NR == 1 && /^# Generated from/ { print; printed = 1; next }
+    /^[[:space:]]*#/ { next }
+    /^[[:space:]]*$/ { if (blank) next; blank = 1; buffered = 1; next }
+    { if (buffered && printed) print ""; buffered = 0; blank = 0; printed = 1; print }
+  ' "$file" >"$file.tmp"
+  mv "$file.tmp" "$file"
+done

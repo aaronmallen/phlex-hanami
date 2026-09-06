@@ -22,6 +22,7 @@ end
 
 group :lint do
   gem "rbs", "~> 4"
+  gem "rbs-inline", "~> 0.14"
   gem "rubocop", "~> 1"
   gem "rubocop-ordered_methods", "~> 0.14"
   gem "rubocop-performance", "~> 1"
