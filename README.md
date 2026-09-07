@@ -129,7 +129,6 @@ Before 0.2.0:
 
 After 0.2.0:
 
-- [ ] Code reloading and memoization in development
 - [ ] `hanami generate` producing Phlex views instead of ERB templates
 
 ## Development

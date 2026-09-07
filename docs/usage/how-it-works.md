@@ -74,3 +74,19 @@ Phlex escapes by default. Hanami's helpers return `SafeString`s meant to be inte
 `Hanami::View::HTML::SafeString` is marked as a Phlex safe object and emitted without escaping twice. Where
 Hanami's helper library defines `raw` and `tag`, which Phlex already owns, Phlex's implementations are mixed back
 in over them.
+
+## Code reloading takes care of itself
+
+Registering classes rather than instances would go stale if anything unloaded them, so this was worth checking.
+Nothing does.
+
+Hanami 3 builds its Zeitwerk loader without `enable_reloading`, so asking it to reload raises
+`Zeitwerk::ReloadingDisabledError`. Constants are never swapped out under a running app, and a memoized
+registration can never point at a class that has been removed from the module tree.
+
+`hanami dev` picks up an edit by restarting the process. It runs `hanami server`, which hanami-reloader replaces
+with guard-puma. Guard watches `app`, `config`, `lib` and `slices`, and asks puma to restart, and puma restarts by
+re-exec'ing itself. Every constant, container registration and action instance is built again from nothing.
+
+So there is nothing to add to `config.no_memoize`. Hanami memoizes components everywhere but the test env, and
+what it memoizes for a Phlex view is the class, which renders as many times as you ask it to.
