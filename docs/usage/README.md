@@ -12,6 +12,10 @@ Guides for the parts of phlex-hanami, in the order most people meet them. The
 
   The `Views::Layout` convention, setting a different layout, opting out, and where `content_for` fits.
 
+- [Components](components.md)
+
+  The component base class, kits, where components live, sharing them between slices, and props.
+
 - [View context](view-context.md)
 
   Routes, assets, `content_for`, flash, session, request and i18n, in a view and in every component under it.

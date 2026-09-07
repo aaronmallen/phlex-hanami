@@ -15,6 +15,10 @@ Without it, `Dry::System` would call `new` on the class while resolving. That ra
 initializer, and it would memoize one Phlex instance, which can only render once. With it,
 `slice["views.posts.index"]` returns the class.
 
+The proc does the same for a module extended with `Phlex::Kit`. A kit is a module, not a class, and `new` on a
+module raises `NoMethodError`, so `slice["components"]` hands back the kit itself. See
+[Components](components.md).
+
 ## Auto render needs nothing else
 
 Hanami's action looks up its paired view by container key, `MyApp::Actions::Posts::Index` to `views.posts.index`,

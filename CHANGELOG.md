@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `Phlex::Hanami::Component`, the base class for everything below a view. It reads the same view context a view
+  does, and has neither a layout nor the `call` contract Hanami renders a view through.
+- `Phlex::Hanami::Contextual`, the view context and slice on their own, for an existing component base class.
+  `Phlex::Hanami::Renderable` now includes it and adds the view half.
+- Support for [Phlex kits](https://www.phlex.fun/components/kits.html). A module extended with `Phlex::Kit`
+  registers in the slice container as the module, so `slice["components"]` returns the kit instead of raising
+  `NoMethodError`.
+- [Components](docs/usage/components.md) documentation, covering the base class, kits, where components live,
+  sharing them between slices, and props.
+
 ## [v0.2.0-alpha.2] - 2026-09-05
 
 ### Added

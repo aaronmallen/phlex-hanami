@@ -110,6 +110,7 @@ end
 
 - [Views](docs/usage/views.md): base classes, how a view is paired with an action, and what it receives
 - [Layouts](docs/usage/layouts.md): the slice convention, per view overrides and opting out
+- [Components](docs/usage/components.md): the component base class, kits, and sharing components between slices
 - [View context](docs/usage/view-context.md): routes, assets, `content_for`, flash, session and request
 - [Helpers](docs/usage/helpers.md): Hanami's helper library, escaping and translations
 - [Responses](docs/usage/responses.md): content types, JSON actions, `HEAD` requests and opting out of auto render
@@ -121,7 +122,7 @@ end
 
 Before 0.2.0:
 
-- [ ] A component base class and `Phlex::Kit` conventions for everything below a view
+- [x] A component base class and `Phlex::Kit` conventions for everything below a view
 - [x] Response format handling, and a documented way to opt out of auto render
 - [x] RSpec support for testing Phlex views in application suites
 - [x] RBS signatures for the public API

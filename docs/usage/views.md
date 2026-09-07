@@ -85,26 +85,20 @@ end
 
 ## Components
 
-Everything below a view is ordinary Phlex. Write components as plain Phlex classes and render them with `render`:
+Everything below a view is a component. Subclass `Phlex::Hanami::Component` and render it with `render`:
 
 ```ruby
 class Index < MyApp::View
   def view_template
     render Nav.new(current: :posts)
-    @posts.each { |post| render PostCard.new(post:) }
+    @posts.each { |post| render MyApp::Components::Card.new(post:) }
   end
 end
 ```
 
 Components share the view context, however deep they sit, so a component nested five levels down can still call
-`path` or `content_for`. See [View context](view-context.md).
-
-Subclass your base view for a component that needs the context. Layouts wrap the view Hanami calls and nothing
-else, so a component you render yourself never picks one up.
-
-> [!NOTE]
-> A component base class and `Phlex::Kit` conventions are still to come. For now, components are whatever your
-> base view is.
+`path` or `content_for`. They never pick up a layout, because a layout wraps the view Hanami calls and nothing
+else. See [Components](components.md).
 
 ## Rendering a view yourself
 
