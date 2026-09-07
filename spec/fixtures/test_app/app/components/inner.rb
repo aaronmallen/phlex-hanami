@@ -2,7 +2,7 @@
 
 module TestApp
   module Components
-    class Inner < TestApp::View
+    class Inner < Phlex::Hanami::Component
       def view_template
         span(id: "deep") { path(:posts) }
       end

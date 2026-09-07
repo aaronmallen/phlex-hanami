@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Phlex::Hanami::Renderable::I18nOverrides do
+RSpec.describe Phlex::Hanami::Contextual::I18nOverrides do
   describe "rendering", type: :request do
     before { get "/posts/-/translated" }
 

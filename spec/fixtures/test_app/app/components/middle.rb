@@ -2,7 +2,7 @@
 
 module TestApp
   module Components
-    class Middle < TestApp::View
+    class Middle < Phlex::Hanami::Component
       def view_template
         div { render TestApp::Components::Inner.new }
       end

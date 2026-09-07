@@ -20,10 +20,12 @@ module TestApp
     get "/posts/-/opted-out", to: "posts.opted_out"
     get "/posts/-/conditional", to: "posts.conditional"
     get "/posts/-/escaping", to: "posts.escaping"
+    get "/posts/-/kitted", to: "posts.kitted"
 
     slice :admin, at: "/admin" do
       get "/posts", to: "posts.index"
       get "/posts/bare", to: "posts.bare"
+      get "/posts/shared", to: "posts.shared"
     end
   end
 end

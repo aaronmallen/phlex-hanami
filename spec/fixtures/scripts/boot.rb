@@ -18,6 +18,7 @@ puts "hanami_mailer_bundled=#{Hanami.bundled?('hanami-mailer')}"
 puts "app_view_class=#{TestApp::App['views.posts.index']}"
 puts "app_view_is_class=#{TestApp::App['views.posts.index'].is_a?(Class)}"
 puts "slice_view_class=#{Admin::Slice['views.posts.index']}"
+puts "kit_module=#{TestApp::App['components']}"
 
 response = session.get("/posts")
 puts "status=#{response.status}"
@@ -28,6 +29,7 @@ puts "second_status=#{second.status}"
 puts "second_body=#{second.body}"
 
 puts "nested_body=#{session.get('/posts/-/nested').body}"
+puts "kitted_body=#{session.get('/posts/-/kitted').body}"
 puts "admin_body=#{session.get('/admin/posts').body}"
 
 # Hanami builds its own context lazily, when the action is instantiated, so only ask for the

@@ -37,6 +37,14 @@ RSpec.describe "booting the fixture app" do
     it "reaches a component nested three levels deep with the context" do
       expect(report["nested_body"]).to eq(%(<div><div><span id="deep">/posts</span></div></div>))
     end
+
+    it "registers a kit as the module rather than instantiating it" do
+      expect(report["kit_module"]).to eq("TestApp::Components")
+    end
+
+    it "calls a kit component as a method from a view" do
+      expect(report["kitted_body"]).to include(%(<article><h2><a href="/posts">Kitted</a></h2><p>body</p></article>))
+    end
   end
 
   let(:env) { {} }
