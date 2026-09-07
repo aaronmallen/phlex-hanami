@@ -18,18 +18,22 @@ module Phlex
       # @api private
       # @since 0.2.0
       module Slice
-        # Returns Phlex classes as classes, and everything else as the loader would.
+        # Returns Phlex classes and kits as themselves, and everything else as the loader would.
         #
         # `component.loader.constant` is what the default autoloading loader already calls, so no
         # extra loading happens here and a constant that fails to load still raises
         # `Dry::System::ComponentNotLoadableError`.
+        #
+        # A kit is a module rather than a class, and the default loader calls `new` on whatever it
+        # resolves, so `slice["components"]` would raise `NoMethodError` for one. Registering it as
+        # the module hands back the thing a kit is for.
         #
         # @api private
         # @since 0.2.0
         COMPONENT_INSTANCE = proc { |component, *args, **kwargs|
           constant = component.loader.constant(component)
 
-          if constant.is_a?(Class) && constant < Phlex::SGML
+          if (constant.is_a?(Class) && constant < Phlex::SGML) || constant.is_a?(Phlex::Kit)
             constant
           else
             component.loader.call(component, *args, **kwargs)
