@@ -7,6 +7,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v0.2.0] - 2026-09-10
+
+First stable release by the new maintainer. It shares no code with 0.1.0, so treat an upgrade from 0.1.0 as a move
+to a new gem and start from the [usage docs](https://github.com/aaronmallen/phlex-hanami/tree/main/docs/usage). The
+alpha sections below record each change as it landed. This section gathers them in one place.
+
+### Added
+
+- `Phlex::Hanami::View` and `Phlex::Hanami::Layout`, the base classes for a view and a layout, and
+  `Phlex::Hanami::Renderable` for a `Phlex::HTML` base class you already have.
+- Auto render. An action renders the Phlex view whose container key matches its own, so
+  `MyApp::Actions::Posts::Index` renders `MyApp::Views::Posts::Index` with no `response.render` call and no
+  configuration. An action with no matching view renders nothing, so a slice can move to Phlex one action at a time.
+- A view receives the exposures and params its `initialize` asks for and drops the rest, so a stray query param does
+  not raise. An initializer that takes `**` receives all of it.
+- A layout convention: `Views::Layout` in a slice wraps that slice's views. `layout` sets a different one, and
+  `layout nil` opts out. The view renders before its layout, so a `content_for` set in the view shows up in the
+  layout's `head`.
+- The view context in every view and every component under it: `path`, `url`, `asset_url`, `content_for`,
+  `csrf_token`, `flash`, `session`, `request` and more. A view reads the same whether or not hanami-view is bundled.
+- `t`, which resolves a relative key against the view's container key, so `t(".title")` in
+  `MyApp::Views::Posts::Index` looks up `posts.index.title`.
+- `Phlex::Hanami::Helpers`, an opt in for Hanami's helper library, such as `form_for` and `format_number`. It needs
+  hanami-view. Their output renders as markup rather than escaped twice, and Phlex keeps its own `raw` and `tag`.
+- `Phlex::Hanami::Component` for everything below a view, `Phlex::Hanami::Contextual` for a component base class you
+  already have, and support for [Phlex kits](https://www.phlex.fun/components/kits.html).
+- Phlex views for [hanami-mailer](https://github.com/hanami/mailer), through `Phlex::Hanami::Mailer::View` and
+  `Phlex::Hanami::Mailer::Layout`. A mailer renders the view whose container key matches its own, and the gem builds
+  the plain text part from the HTML unless the view defines `text_body`.
+- `Phlex::Hanami::Testing::ViewHelpers`, for testing a view or a component without a request, and
+  `require "phlex/hanami/rspec"` to include them in every example group tagged `type: :view`.
+- RBS signatures for the public API, shipped in `sig`.
+- Usage docs for every part of the gem, including how it hooks into Hanami and why code reloading needs no extra
+  work.
+
 ## [v0.2.0-alpha.3] - 2026-09-06
 
 ### Added
@@ -66,7 +101,8 @@ Initial alpha release by the new maintainer [@aaronmallen](https://github.com/aa
 
 Initial release, by the previous maintainer [@stephannv](https://github.com/stephannv).
 
-[Unreleased]: https://github.com/aaronmallen/phlex-hanami/compare/0.2.0-alpha.3...HEAD
+[Unreleased]: https://github.com/aaronmallen/phlex-hanami/compare/0.2.0...HEAD
+[v0.2.0]: https://github.com/aaronmallen/phlex-hanami/compare/0.2.0-alpha.3...0.2.0
 [v0.2.0-alpha.3]: https://github.com/aaronmallen/phlex-hanami/compare/0.2.0-alpha.2...0.2.0-alpha.3
 [v0.2.0-alpha.2]: https://github.com/aaronmallen/phlex-hanami/compare/0.2.0-alpha.1...0.2.0-alpha.2
 [v0.2.0-alpha.1]: https://github.com/aaronmallen/phlex-hanami/releases/tag/0.2.0-alpha.1

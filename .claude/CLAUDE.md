@@ -7,8 +7,8 @@ bootable Hanami app under `spec/fixtures/test_app`.
 ## Start Here
 
 Read @README.md before you touch anything. It says what the gem does, what the public API looks like, and what is
-still outstanding before 0.2.0. Its "How it works" section states each design decision and why Hanami is never
-taught that Phlex exists. Most questions about why a thing is shaped the way it is are answered there.
+on the roadmap. @docs/usage/how-it-works.md states each design decision and why Hanami is never taught that Phlex
+exists. It answers most questions about why a thing has the shape it has.
 
 @CHANGELOG.md tracks releases. The 0.1.0 on RubyGems came from the previous owner and shares no code with this
 repository; releases from 0.2.0 on come from here.

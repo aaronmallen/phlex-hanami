@@ -76,7 +76,7 @@ We follow responsible disclosure practices:
 
 | Version | Support |
 |:-------:|:-------:|
-|  0.2.x  |   🧪    |
+|  0.2.x  |   ✅    |
 |  < 0.2  |   ❌    |
 
 ### Key

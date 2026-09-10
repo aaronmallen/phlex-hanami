@@ -1,26 +1,20 @@
 # Phlex::Hanami
 
-> [!WARNING]
-> This is an alpha release. Everything here works and the spec suite covers it, but the public API is not settled.
-> Names and behaviour can change between alphas with no deprecation cycle. The [roadmap](#roadmap) lists what is
-> left before 0.2.0.
-
 An object oriented view layer for [Hanami](https://hanamirb.org). Write views, layouts and components as
 [Phlex](https://www.phlex.fun) classes instead of templates.
 
 ## Installation
 
-Add the gem to your Gemfile. The version constraint is required, because Bundler will not resolve a prerelease
-without one:
+Add the gem to your Gemfile:
 
 ```ruby
-gem "phlex-hanami", "~> 0.2.0.pre.alpha"
+gem "phlex-hanami", "~> 0.2.0"
 ```
 
 Or, from [gem.coop](https://gem.coop):
 
 ```ruby
-gem "phlex-hanami", "~> 0.2.0.pre.alpha", source: "https://gem.coop/@aaron"
+gem "phlex-hanami", "~> 0.2.0", source: "https://gem.coop/@aaron"
 ```
 
 > [!NOTE]
@@ -119,15 +113,6 @@ end
 - [How it works](docs/usage/how-it-works.md): what the gem installs, and why each piece is there
 
 ## Roadmap
-
-Before 0.2.0:
-
-- [x] A component base class and `Phlex::Kit` conventions for everything below a view
-- [x] Response format handling, and a documented way to opt out of auto render
-- [x] RSpec support for testing Phlex views in application suites
-- [x] RBS signatures for the public API
-
-After 0.2.0:
 
 - [ ] `hanami generate` producing Phlex views instead of ERB templates
 
