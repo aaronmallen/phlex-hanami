@@ -4,4 +4,12 @@
 
 set -e
 
-ec -config .config/editorconfig-checker.json
+# Upstream renamed the binary from `ec` to `editorconfig-checker`, and which name mise installs
+# depends on the mise release as well as the tool's, so a laptop and CI can disagree.
+if command -v editorconfig-checker >/dev/null 2>&1; then
+  ec=editorconfig-checker
+else
+  ec=ec
+fi
+
+"$ec" -config .config/editorconfig-checker.json
