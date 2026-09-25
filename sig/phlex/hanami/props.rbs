@@ -1,0 +1,45 @@
+# Generated from lib/phlex/hanami/props.rb with RBS::Inline
+
+module Phlex
+  module Hanami
+    module Props
+      UNSET: Object
+
+      UNSET_PATH: String
+
+      NAME_FORMAT: Regexp
+
+      def self.assign: (untyped, Binding) -> void
+
+      def self.included: (Module) -> void
+
+      module ClassMethods
+        def prop: (Symbol, untyped, ?default: untyped) -> Symbol
+
+        def props: () -> Hash[Symbol, Prop]
+
+        private
+
+        def define_props_initializer: () -> void
+
+        def own_props: () -> Hash[Symbol, Prop]
+      end
+
+      class Prop
+        attr_reader name: Symbol
+
+        def initialize: (Symbol, untyped, untyped) -> void
+
+        def optional?: () -> bool
+
+        def resolve: (Module, untyped) -> untyped
+
+        private
+
+        def cast: (Module, untyped) -> untyped
+
+        def type_default?: () -> bool
+      end
+    end
+  end
+end
