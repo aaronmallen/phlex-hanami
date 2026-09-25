@@ -83,6 +83,16 @@ class Search < MyApp::View
 end
 ```
 
+A param reaches the view as a string. Declare it as a [prop](components.md#props) with a dry type to coerce it:
+
+```ruby
+class Index < MyApp::View
+  include Phlex::Hanami::Props
+
+  prop :page, Types::Params::Integer.default(1)
+end
+```
+
 ## Components
 
 Everything below a view is a component. Subclass `Phlex::Hanami::Component` and render it with `render`:

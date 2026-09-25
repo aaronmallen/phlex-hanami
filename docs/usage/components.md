@@ -140,8 +140,7 @@ there.
 
 ## Props
 
-The gem stays out of this. A Phlex class collects its props in `initialize`, and plain keyword arguments are
-enough:
+A Phlex class collects its props in `initialize`, and plain keyword arguments are enough:
 
 ```ruby
 def initialize(post:, compact: false)
@@ -150,7 +149,43 @@ def initialize(post:, compact: false)
 end
 ```
 
-If you want types and defaults declared instead, [Literal](https://literal.fun) fits without any help from us:
+To declare types and defaults instead, include `Phlex::Hanami::Props` and type each prop with
+[dry-types](https://dry-rb.org/gems/dry-types):
+
+```ruby
+class Card < Phlex::Hanami::Component
+  include Phlex::Hanami::Props
+
+  prop :post, Types::Instance(Post)
+  prop :count, Types::Params::Integer
+  prop :compact, Types::Bool, default: false
+  prop :tags, Types::Array.of(Types::String), default: -> { [] }
+
+  def view_template
+    article(class: ("compact" if @compact)) { h2 { @post.title } }
+  end
+end
+```
+
+Each prop becomes a keyword of `initialize` and an instance variable of the same name. The gem calls the type
+with the value, so a dry type coerces as well as checks, and `Types::Params::Integer` turns `"5"` into `5`. A
+value the type rejects raises `Phlex::Hanami::InvalidPropError`, which keeps the type's own error as its `cause`.
+
+A prop with a `default` is optional, and so is one whose type has its own, such as `Types::Bool.default(false)`.
+Defaults go through the type too. Pass a proc for anything mutable, so each instance gets a fresh one.
+
+The type can be anything that answers `call`. Anything that does not, such as a plain class, has to match with
+`===`, so `prop :post, Post` works too.
+
+The same works in a view. Its `initialize` declares real keywords, so auto render still drops every param the
+view does not declare. See [Views](views.md#what-a-view-receives).
+
+The gem does not depend on dry-types. Add it to your Gemfile, and define `Types` the way the
+[dry-types docs](https://dry-rb.org/gems/dry-types/main/getting-started/) show.
+
+### Literal
+
+[Literal](https://literal.fun) works too, with no help from us. Extend it in place of `Phlex::Hanami::Props`:
 
 ```ruby
 class Card < Phlex::Hanami::Component
@@ -160,6 +195,8 @@ class Card < Phlex::Hanami::Component
   prop :compact, _Boolean, default: false
 end
 ```
+
+Pick one per class. Both define `prop`.
 
 ## Testing
 

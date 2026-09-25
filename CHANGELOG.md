@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `Phlex::Hanami::Props`, an opt in `prop` for views and components typed with dry-types. The type coerces as
+  well as checks, so a view can turn a request param into an Integer. Literal still works as before.
+
 ## [v0.2.0] - 2026-09-10
 
 First stable release by the new maintainer. It shares no code with 0.1.0, so treat an upgrade from 0.1.0 as a move
