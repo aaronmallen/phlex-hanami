@@ -21,6 +21,7 @@ module TestApp
     get "/posts/-/conditional", to: "posts.conditional"
     get "/posts/-/escaping", to: "posts.escaping"
     get "/posts/-/kitted", to: "posts.kitted"
+    get "/posts/-/paged", to: "posts.paged"
 
     slice :admin, at: "/admin" do
       get "/posts", to: "posts.index"

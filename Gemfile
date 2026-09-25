@@ -9,6 +9,7 @@ group :development do
 end
 
 group :development, :test do
+  gem "dry-types", "~> 1.7"
   gem "hanami-action", "~> 3.0"
   gem "hanami-mailer", "~> 3.0"
   gem "hanami-router", "~> 3.0"
