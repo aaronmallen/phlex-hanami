@@ -108,7 +108,8 @@ Initial alpha release by the new maintainer [@aaronmallen](https://github.com/aa
 
 Initial release, by the previous maintainer [@stephannv](https://github.com/stephannv).
 
-[Unreleased]: https://github.com/aaronmallen/phlex-hanami/compare/0.2.0...HEAD
+[Unreleased]: https://github.com/aaronmallen/phlex-hanami/compare/0.2.1...HEAD
+[v0.2.1]: https://github.com/aaronmallen/phlex-hanami/compare/0.2.0...0.2.1
 [v0.2.0]: https://github.com/aaronmallen/phlex-hanami/compare/0.2.0-alpha.3...0.2.0
 [v0.2.0-alpha.3]: https://github.com/aaronmallen/phlex-hanami/compare/0.2.0-alpha.2...0.2.0-alpha.3
 [v0.2.0-alpha.2]: https://github.com/aaronmallen/phlex-hanami/compare/0.2.0-alpha.1...0.2.0-alpha.2
