@@ -4,4 +4,6 @@
 
 set -e
 
-gem push pkg/phlex-hanami-*.gem
+version="$(ruby -e "puts Gem::Specification.load('phlex-hanami.gemspec').version")"
+
+gem push "pkg/phlex-hanami-${version}.gem"

@@ -5,6 +5,8 @@
 
 set -e
 
+version="$(ruby -e "puts Gem::Specification.load('phlex-hanami.gemspec').version")"
+
 # usage_push_key comes from the USAGE arg above, set by mise.
 # shellcheck disable=SC2154
-GEM_HOST_API_KEY="${usage_push_key}" gem push pkg/phlex-hanami-*.gem --host https://gem.coop/@aaron
+GEM_HOST_API_KEY="${usage_push_key}" gem push "pkg/phlex-hanami-${version}.gem" --host https://gem.coop/@aaron
