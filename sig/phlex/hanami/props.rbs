@@ -9,34 +9,68 @@ module Phlex
 
       NAME_FORMAT: Regexp
 
+      KINDS: Array[Symbol]
+
+      VISIBILITIES: Array[Symbol | false]
+
       def self.assign: (untyped, Binding) -> void
 
       def self.included: (Module) -> void
 
       module ClassMethods
-        def prop: (Symbol, untyped, ?default: untyped) -> Symbol
+        def prop: (Symbol name, untyped type, ?Symbol kind, ?default: untyped, ?reader: Symbol | false, ?writer: Symbol | false, ?predicate: Symbol | false) ?{ (untyped) -> untyped } -> Symbol
+
+        def prop?: (Symbol name, untyped type, ?Symbol kind, ?reader: Symbol | false, ?writer: Symbol | false, ?predicate: Symbol | false) ?{ (untyped) -> untyped } -> Symbol
 
         def props: () -> Hash[Symbol, Prop]
 
         private
 
+        def check_methods: (Prop, Hash[Symbol, Symbol | false]) -> void
+
+        def check_positional_order: (Prop, Array[Prop]) -> void
+
+        def check_splat: (Prop, Array[Prop]) -> void
+
+        def declare_prop: (Prop, Hash[Symbol, Symbol | false]) -> Symbol
+
+        def define_prop_method: (Prop, Symbol) -> Symbol
+
+        def define_prop_writer: (Prop) -> Symbol
+
+        def define_prop_methods: (Prop, Hash[Symbol, Symbol | false]) -> void
+
         def define_props_initializer: () -> void
 
         def own_props: () -> Hash[Symbol, Prop]
+
+        def props_module: () -> Module
       end
 
       class Prop
         attr_reader name: Symbol
 
-        def initialize: (Symbol, untyped, untyped) -> void
+        attr_reader kind: Symbol
+
+        def initialize: (Symbol, untyped, Symbol, default: untyped, omittable: bool, coercion: Proc?) -> void
+
+        def cast: (Module, untyped) -> untyped
 
         def optional?: () -> bool
 
-        def resolve: (Module, untyped) -> untyped
+        def parameter: () -> String
+
+        def resolve: (untyped, untyped) -> untyped
+
+        def variable: () -> Symbol
 
         private
 
-        def cast: (Module, untyped) -> untyped
+        def default_value: (untyped) -> untyped
+
+        def nilable?: () -> bool
+
+        def splat?: (Symbol) -> bool
 
         def type_default?: () -> bool
       end
