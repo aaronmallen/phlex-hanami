@@ -172,13 +172,106 @@ with the value, so a dry type coerces as well as checks, and `Types::Params::Int
 value the type rejects raises `Phlex::Hanami::InvalidPropError`, which keeps the type's own error as its `cause`.
 
 A prop with a `default` is optional, and so is one whose type has its own, such as `Types::Bool.default(false)`.
-Defaults go through the type too. Pass a proc for anything mutable, so each instance gets a fresh one.
+Defaults go through the type too. Pass a proc for anything mutable, so each instance gets a fresh one. The proc
+runs on the new instance, so it can read the props declared above it.
+
+A prop whose type accepts nil, such as `Types::String.optional`, is optional as well, and is nil when left out.
 
 The type can be anything that answers `call`. Anything that does not, such as a plain class, has to match with
 `===`, so `prop :post, Post` works too.
 
 The same works in a view. Its `initialize` declares real keywords, so auto render still drops every param the
 view does not declare. See [Views](views.md#what-a-view-receives).
+
+### Left out or nil
+
+`prop?` declares a prop the caller can leave out. When they do, it holds `Phlex::Hanami::Props::UNSET` rather than
+nil, so the class can tell the two apart:
+
+```ruby
+class Form < Phlex::Hanami::Component
+  include Phlex::Hanami::Props
+
+  prop? :token, Types::String.optional
+
+  def view_template
+    form(method: "post") do
+      input(type: "hidden", name: "_csrf_token", value: token) if token
+      yield
+    end
+  end
+
+  private
+
+  # Left out means the session's token. An explicit nil means none.
+  def token = Phlex::Hanami::Props::UNSET.equal?(@token) ? csrf_token : @token
+end
+```
+
+The type never sees `UNSET`, only what the caller passes.
+
+### Other kinds
+
+A prop is a keyword unless you give it a kind as the third argument:
+
+```ruby
+class Button < Phlex::Hanami::Component
+  include Phlex::Hanami::Props
+
+  prop :label, Types::String, :positional
+  prop :variant, Types::Symbol, default: :primary
+  prop :attributes, Types::Hash, :**
+
+  def view_template
+    button(class: "btn btn-#{@variant}", **@attributes) { @label }
+  end
+end
+
+render Button.new("Save", type: "submit", data: { turbo: false })
+```
+
+`:**` gathers every keyword no other prop declares into a Hash, and `:*` gathers the leftover positional arguments
+into an Array. The type checks the whole Hash or Array. Neither takes a default: each is empty when nothing is
+left over. A class has at most one of each.
+
+A view with a `:**` prop receives every exposure and request param, the same as a hand written `**`. Keep to
+keywords in a view, since auto render passes nothing by position.
+
+There is no block kind. Phlex takes the block passed to `new` for the content, so `initialize` never sees it.
+
+### Coercion
+
+A block runs on the new instance with the value, before the type sees it:
+
+```ruby
+prop :tags, Types::Array.of(Types::String) do |value|
+  value.is_a?(String) ? value.split(",") : value
+end
+```
+
+It runs on a default too.
+
+### Readers, writers and predicates
+
+`reader:`, `writer:` and `predicate:` each take `:public`, `:protected` or `:private` and define that method:
+
+```ruby
+prop :post, Types::Instance(Post), reader: :private
+prop :compact, Types::Bool, default: false, predicate: :public
+```
+
+A writer runs the value through the type, the same as `initialize`. Watch the names: a reader called `title` or `p`
+replaces the Phlex element of that name. The `:class` prop cannot have a reader.
+
+### After initialize
+
+Define `after_initialize` to run code once every prop is set:
+
+```ruby
+def after_initialize
+  @slug = @post.title.downcase.tr(" ", "-")
+end
+```
 
 The gem does not depend on dry-types. Add it to your Gemfile, and define `Types` the way the
 [dry-types docs](https://dry-rb.org/gems/dry-types/main/getting-started/) show.

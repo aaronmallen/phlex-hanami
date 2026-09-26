@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- A kind for `prop`: `:positional`, `:*` for the leftover positional arguments, or `:**` for the leftover
+  keywords, so a component can pass HTML attributes through to its tag.
+- `prop?`, which sets the prop to `Phlex::Hanami::Props::UNSET` when the caller leaves it out, so a class can tell
+  that from `nil`.
+- A block on `prop` that coerces the value before the type sees it.
+- `reader:`, `writer:` and `predicate:` options on `prop`.
+- An `after_initialize` hook, called once every prop is set.
+
+### Changed
+
+- A prop whose type accepts nil, such as `Types::String.optional`, is now optional and nil when left out.
+- A default proc now runs on the new instance, so it can read the props declared above it.
+
 ## [v0.2.1] - 2026-09-26
 
 ### Added
