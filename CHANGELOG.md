@@ -7,20 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v0.2.2] - 2026-09-26
+
 ### Added
 
-- A kind for `prop`: `:positional`, `:*` for the leftover positional arguments, or `:**` for the leftover
-  keywords, so a component can pass HTML attributes through to its tag.
-- `prop?`, which sets the prop to `Phlex::Hanami::Props::UNSET` when the caller leaves it out, so a class can tell
-  that from `nil`.
-- A block on `prop` that coerces the value before the type sees it.
-- `reader:`, `writer:` and `predicate:` options on `prop`.
-- An `after_initialize` hook, called once every prop is set.
+- A kind for `prop` in `Phlex::Hanami::Props`, as its third argument: `:positional`, `:*` for the leftover
+  positional arguments as an Array, or `:**` for the leftover keywords as a Hash. A component can now take
+  `prop :attributes, Types::Hash, :**` and pass HTML attributes through to its tag. A view with a `:**` prop receives
+  every exposure and request param.
+- `prop?`, for a prop the caller can leave out. When they do, it holds `Phlex::Hanami::Props::UNSET` rather than
+  `nil`, so a form can use the session's CSRF token by default and none when passed `token: nil`.
+- A block on `prop`, which runs on the new instance and coerces the value before the type sees it.
+- `reader:`, `writer:` and `predicate:` options on `prop`, each taking `:public`, `:protected` or `:private`. The
+  writer checks the value against the type.
+- `after_initialize`, which a class can define to run once every prop is set.
 
 ### Changed
 
-- A prop whose type accepts nil, such as `Types::String.optional`, is now optional and nil when left out.
-- A default proc now runs on the new instance, so it can read the props declared above it.
+- A prop whose type accepts `nil`, such as `Types::String.optional` or `NilClass`, is now optional and `nil` when
+  left out. It used to be required.
+- A default proc now runs on the new instance rather than on its own, so it can read the props declared above it. A
+  proc that relied on `self` being the class it was written in needs to change.
 
 ## [v0.2.1] - 2026-09-26
 
@@ -123,7 +130,8 @@ Initial alpha release by the new maintainer [@aaronmallen](https://github.com/aa
 
 Initial release, by the previous maintainer [@stephannv](https://github.com/stephannv).
 
-[Unreleased]: https://github.com/aaronmallen/phlex-hanami/compare/0.2.1...HEAD
+[Unreleased]: https://github.com/aaronmallen/phlex-hanami/compare/0.2.2...HEAD
+[v0.2.2]: https://github.com/aaronmallen/phlex-hanami/compare/0.2.1...0.2.2
 [v0.2.1]: https://github.com/aaronmallen/phlex-hanami/compare/0.2.0...0.2.1
 [v0.2.0]: https://github.com/aaronmallen/phlex-hanami/compare/0.2.0-alpha.3...0.2.0
 [v0.2.0-alpha.3]: https://github.com/aaronmallen/phlex-hanami/compare/0.2.0-alpha.2...0.2.0-alpha.3
