@@ -7,10 +7,10 @@ module Phlex
     # The type's own error, when there is one, is kept as the `cause`.
     #
     # @api public
-    # @since 0.3.0
+    # @since 0.2.1
     class InvalidPropError < Error
       # @api private
-      # @since 0.3.0
+      # @since 0.2.1
       #: (Module, Symbol, String) -> void
       def initialize(view_class, name, reason)
         super(<<~MESSAGE)
