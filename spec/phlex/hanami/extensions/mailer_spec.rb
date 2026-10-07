@@ -10,6 +10,10 @@ RSpec.describe Phlex::Hanami::Extensions::Mailer do
       expect(Admin::Mailers::Report.phlex_view).to be(Admin::Views::Mailers::Report)
     end
 
+    it "pairs under the slice's view_name_inference_base" do
+      expect(Studio::Mailers::Welcome.phlex_view).to be(Studio::Ui::Views::Mailers::Welcome)
+    end
+
     it "is nil for a mailer with no matching view" do
       expect(TestApp::Mailers::Unpaired.phlex_view).to be_nil
     end

@@ -21,6 +21,12 @@ RSpec.describe "auto-rendering Phlex views", type: :request do
     expect(last_response.body).to include("<h2>Admin posts</h2>")
   end
 
+  it "renders a view and its layout from a slice that keeps its views under another base" do
+    get "/studio"
+
+    expect(last_response.body).to eq(%(<main id="studio"><h1>Studio</h1></main>))
+  end
+
   it "passes request params to the view" do
     get "/posts/42"
 
@@ -75,6 +81,18 @@ RSpec.describe "auto-rendering Phlex views", type: :request do
     get "/posts"
 
     expect(last_response.body).to include(%(<a href="/posts">All posts</a>))
+  end
+
+  it "renders a slice's routes with the prefix the slice is mounted at" do
+    get "/blog/posts"
+
+    expect(last_response.body).to include(%(<a href="/blog/posts">Posts</a>))
+  end
+
+  it "renders app routes from a slice that has routes of its own" do
+    get "/blog/posts"
+
+    expect(last_response.body).to include(%(<a href="/">Home</a>))
   end
 
   it "uses the default view name inferrer" do

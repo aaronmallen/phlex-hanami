@@ -6,6 +6,10 @@ RSpec.describe Phlex::Hanami::Mailer::Renderable do
       expect(TestApp::Views::Mailers::Welcome.layout).to be(TestApp::Views::Mailers::Layout)
     end
 
+    it "finds the mail layout under the slice's view_name_inference_base" do
+      expect(Studio::Ui::Views::Mailers::Welcome.layout).to be(Studio::Ui::Views::Mailers::Layout)
+    end
+
     it "ignores the slice's web layout" do
       expect(Admin::Views::Mailers::Report.layout).to be_nil
     end

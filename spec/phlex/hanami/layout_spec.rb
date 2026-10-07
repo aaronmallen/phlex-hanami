@@ -6,6 +6,10 @@ RSpec.describe Phlex::Hanami::Layout do
       expect(Admin::Views::Posts::Index.layout).to be(Admin::Views::Layout)
     end
 
+    it "finds the layout under the slice's view_name_inference_base" do
+      expect(Studio::Ui::Views::Home::Index.layout).to be(Studio::Ui::Views::Layout)
+    end
+
     it "is nil for a slice with no conventional layout" do
       expect(TestApp::Views::Posts::Index.layout).to be_nil
     end

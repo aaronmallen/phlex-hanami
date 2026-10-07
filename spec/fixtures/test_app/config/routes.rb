@@ -28,5 +28,11 @@ module TestApp
       get "/posts/bare", to: "posts.bare"
       get "/posts/shared", to: "posts.shared"
     end
+
+    slice :blog, at: "/blog"
+
+    slice :studio, at: "/studio" do
+      get "/", to: "home.index"
+    end
   end
 end
