@@ -14,6 +14,8 @@ module Phlex
 
         def self.view_context_class: (singleton(::Hanami::Slice)) -> (singleton(::Hanami::View::Context) | singleton(Context))
 
+        def self.view_key: (singleton(::Hanami::Slice), String) -> String
+
         private def self.views_namespace: (singleton(::Hanami::Slice)) -> Module
       end
     end
