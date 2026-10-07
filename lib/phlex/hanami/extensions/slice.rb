@@ -109,6 +109,26 @@ module Phlex
             define_view_context(slice)
           end
 
+          # The container key for a view, under the base Hanami pairs an action's view with.
+          #
+          # Reads `config.actions.view_name_inference_base`, so a slice that keeps its views under
+          # `ui.views` finds its layouts and mail views there too. Falls back to `views` when
+          # hanami-action is not bundled, because Hanami has no such setting then.
+          #
+          # @example
+          #   Slice.view_key(MyApp::App, "mailers.welcome") # => "views.mailers.welcome"
+          #
+          # @return [String]
+          #
+          # @api private
+          # @since 0.3.0
+          #: (singleton(::Hanami::Slice), String) -> String
+          def view_key(slice, name)
+            actions = slice.config.actions
+            base = actions.respond_to?(:view_name_inference_base) ? actions.view_name_inference_base : "views"
+            [base, name].compact.join(".")
+          end
+
           private
 
           #: (singleton(::Hanami::Slice)) -> Module

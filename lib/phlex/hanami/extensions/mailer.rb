@@ -42,8 +42,10 @@ module Phlex
           #
           # The key is derived the way hanami-mailer derives a template name: underscore the class
           # name and drop the slice's own segment, so `MyApp::Mailers::Welcome` looks up
-          # `views.mailers.welcome`. Resolved through the container on every call rather than
-          # memoized, so code reloading is not defeated.
+          # `views.mailers.welcome`. The `views` is the slice's
+          # `config.actions.view_name_inference_base`, so mail views live where action views do.
+          # Resolved through the container on every call rather than memoized, so code reloading is
+          # not defeated.
           #
           # @return [Class, nil]
           #
@@ -56,7 +58,7 @@ module Phlex
             mailer_slice = slice
             return nil unless mailer_slice && name
 
-            key = "views.#{view_name(mailer_slice)}"
+            key = Extensions::Slice.view_key(mailer_slice, view_name(mailer_slice))
             return nil unless mailer_slice.key?(key)
 
             view = mailer_slice[key]

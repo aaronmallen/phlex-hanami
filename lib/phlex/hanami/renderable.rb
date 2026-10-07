@@ -140,15 +140,15 @@ module Phlex
           input.slice(*parameters.filter_map { |type, name| name if KEYWORD_TYPES.include?(type) })
         end
 
-        # The slice's conventional layout: `Views::Layout` in the slice's namespace, if it defines
-        # one. Resolved on each call rather than memoized, so code reloading is not defeated.
+        # The slice's conventional layout: `views.layout` in its container, if it has one, under
+        # whatever base the slice pairs action views with. Resolved on each call rather than
+        # memoized, so code reloading is not defeated.
         #: () -> singleton(::Phlex::SGML)?
         def default_layout
           return nil unless slice
-          return nil unless slice.namespace.const_defined?(:Views, false)
 
-          views = slice.namespace.const_get(:Views, false)
-          views.const_get(:Layout, false) if views.const_defined?(:Layout, false)
+          key = Extensions::Slice.view_key(slice, "layout")
+          slice[key] if slice.key?(key)
         end
       end
     end

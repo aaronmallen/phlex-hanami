@@ -59,7 +59,8 @@ module Phlex
 
           private
 
-          # A slice's conventional mail layout: `Views::Mailers::Layout`, if it defines one.
+          # A slice's conventional mail layout: `views.mailers.layout` in its container, if it has
+          # one, under whatever base the slice pairs action views with.
           #
           # The web layout is the wrong one for an email — it carries the stylesheets, scripts and
           # page chrome no mail client wants — so mail looks for its own, and renders without a
@@ -67,13 +68,9 @@ module Phlex
           #: () -> singleton(::Phlex::SGML)?
           def default_layout
             return nil unless slice
-            return nil unless slice.namespace.const_defined?(:Views, false)
 
-            views = slice.namespace.const_get(:Views, false)
-            return nil unless views.const_defined?(:Mailers, false)
-
-            mailers = views.const_get(:Mailers, false)
-            mailers.const_get(:Layout, false) if mailers.const_defined?(:Layout, false)
+            key = Extensions::Slice.view_key(slice, "mailers.layout")
+            slice[key] if slice.key?(key)
           end
 
           # The slice's view context, built without a request.
