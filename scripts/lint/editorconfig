@@ -4,4 +4,13 @@
 
 set -e
 
-ec -config .config/editorconfig-checker.json
+# The binary is `ec` or `editorconfig-checker` depending on the mise release, so CI and a laptop
+# can disagree. Check for `ec` first: a stale `editorconfig-checker` shim from another version
+# can sit on PATH next to a working `ec`.
+if command -v ec >/dev/null 2>&1; then
+  ec=ec
+else
+  ec=editorconfig-checker
+fi
+
+"$ec" -config .config/editorconfig-checker.json
