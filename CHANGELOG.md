@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v0.3.0] - 2026-10-07
+
+### Changed
+
+- A view's `routes`, `path` and `url` now use the app's routes, even in a slice with a routes file of its own. That
+  slice's own routes knew only its own names and dropped the prefix it is mounted at, so `path(:posts)` in a slice
+  mounted at `/blog` gave `"/posts"`. A view now names the route the way an action does: `path(:blog_posts)` gives
+  `"/blog/posts"`. Slices mounted at `"/"` keep their names. With hanami-view bundled, Hanami builds the context, so
+  the fix comes with Hanami's next release. ([#7](https://github.com/aaronmallen/phlex-hanami/issues/7))
+
+### Fixed
+
+- Mail views and layouts follow `config.actions.view_name_inference_base`. A slice that sets it to `"ui.views"` now
+  finds `ui.views.mailers.welcome`, `ui.views.layout` and `ui.views.mailers.layout`, where before it looked only
+  under `views`. ([#6](https://github.com/aaronmallen/phlex-hanami/issues/6))
+
 ## [v0.2.2] - 2026-09-26
 
 ### Added
@@ -130,7 +146,8 @@ Initial alpha release by the new maintainer [@aaronmallen](https://github.com/aa
 
 Initial release, by the previous maintainer [@stephannv](https://github.com/stephannv).
 
-[Unreleased]: https://github.com/aaronmallen/phlex-hanami/compare/0.2.2...HEAD
+[Unreleased]: https://github.com/aaronmallen/phlex-hanami/compare/0.3.0...HEAD
+[v0.3.0]: https://github.com/aaronmallen/phlex-hanami/compare/0.2.2...0.3.0
 [v0.2.2]: https://github.com/aaronmallen/phlex-hanami/compare/0.2.1...0.2.2
 [v0.2.1]: https://github.com/aaronmallen/phlex-hanami/compare/0.2.0...0.2.1
 [v0.2.0]: https://github.com/aaronmallen/phlex-hanami/compare/0.2.0-alpha.3...0.2.0
