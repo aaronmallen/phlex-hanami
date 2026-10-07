@@ -69,9 +69,12 @@ module Phlex
         slice["i18n"] if slice.key?("i18n")
       end
 
+      # Resolves from the app, not the slice. A slice with its own routes file registers its own
+      # "routes", which knows only that slice's names and none of the prefix it is mounted at.
+      # Actions resolve the app's, so this keeps a view and an action in the same slice in step.
       #: () -> ::Hanami::Slice::RoutesHelper?
       def resolve_routes
-        slice["routes"] if slice.key?("routes")
+        slice.app["routes"] if slice.app.key?("routes")
       end
     end
   end
