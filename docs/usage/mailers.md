@@ -39,6 +39,8 @@ end
 ```
 
 `MyApp::Mailers::Welcome` looks up `views.mailers.welcome`, so the names line up the way action and view names do.
+The `views` part follows `config.actions.view_name_inference_base`, so a slice that sets it to `"ui.views"` looks up
+`ui.views.mailers.welcome` and keeps its mail layout in `ui/views/mailers/layout.rb`.
 A mailer with no Phlex view falls through to whatever hanami-mailer would have done, which lets an app move its
 mail across one message at a time.
 

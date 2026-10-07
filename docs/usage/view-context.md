@@ -10,7 +10,7 @@ the same context the view does.
 |---------------------|------------------------------------------------------------------|
 | `path(...)`         | The path for a named route, as a String                          |
 | `url(...)`          | The full URL for a named route, as a String                      |
-| `routes`            | The slice's routes helper                                        |
+| `routes`            | The app's routes helper, even in a slice                         |
 | `assets`            | The slice's assets                                               |
 | `asset_url(source)` | The URL for one asset                                            |
 | `content_for(...)`  | Store a string of markup for later, or read back what was stored |

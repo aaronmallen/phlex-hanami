@@ -33,6 +33,9 @@ instead if you have one.
 A slice with no `Views::Layout` renders its views bare. Each slice resolves its own, so the `Admin` slice uses
 `Admin::Views::Layout` and falls back to nothing rather than to the app's.
 
+A slice that sets `config.actions.view_name_inference_base` finds its layout under that base instead. Set it to
+`"ui.views"` and the layout lives in `ui/views/layout.rb`, next to the views.
+
 ## Choosing a different one
 
 `layout` sets the layout for a class and everything under it:
