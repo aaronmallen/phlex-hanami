@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+#MISE description="Validate all rbs signatures"
+#MISE alias=["l:rbs", "l:types", "lint:types"]
+
+set -e
+
+# `uri` for `Hanami::Slice::RoutesHelper#url`, which is the only stdlib type the signatures name.
+bundle exec rbs -r uri -I sig validate

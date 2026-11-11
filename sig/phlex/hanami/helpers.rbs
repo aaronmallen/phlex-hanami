@@ -1,0 +1,13 @@
+# Generated from lib/phlex/hanami/helpers.rb with RBS::Inline
+
+module Phlex
+  module Hanami
+    module Helpers
+      OVERRIDDEN_METHODS: Hash[Symbol, UnboundMethod]
+
+      PhlexMethods: Module
+
+      def self.included: (singleton(::Phlex::SGML)) -> void
+    end
+  end
+end

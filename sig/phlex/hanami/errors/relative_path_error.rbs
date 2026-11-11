@@ -1,0 +1,9 @@
+# Generated from lib/phlex/hanami/errors/relative_path_error.rb with RBS::Inline
+
+module Phlex
+  module Hanami
+    class RelativePathError < Error
+      def initialize: (singleton(::Phlex::SGML)) -> void
+    end
+  end
+end

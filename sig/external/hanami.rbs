@@ -1,0 +1,77 @@
+module Hanami
+  def self.app: () -> singleton(Slice)
+
+  def self.app?: () -> bool
+
+  def self.bundled?: (String) -> bool
+
+  class Error < StandardError
+  end
+
+  class ComponentLoadError < Error
+  end
+
+  module SliceConfigurable
+  end
+
+  # A slice is used as a class throughout, never instantiated, so every signature that takes one
+  # says `singleton(Hanami::Slice)`.
+  class Slice
+    def self.app: () -> singleton(Slice)
+
+    def self.[]: (String) -> untyped
+
+    def self.inflector: () -> Dry::Inflector
+
+    def self.key?: (String) -> bool
+
+    def self.namespace: () -> Module
+
+    def self.slice_name: () -> SliceName
+
+    class RoutesHelper
+      def path: (*untyped, **untyped) -> String
+
+      def url: (*untyped, **untyped) -> URI::Generic
+    end
+  end
+
+  class SliceName
+    def name: () -> String
+
+    def path: () -> String
+  end
+
+  class Assets
+    def []: (String) -> _Asset
+  end
+
+  interface _Asset
+    def url: () -> String
+  end
+
+  class Action
+    class Flash
+    end
+
+    class Request
+      class Session
+        def []: (String | Symbol) -> untyped
+      end
+
+      def flash: () -> Flash
+
+      def session: () -> Session
+    end
+  end
+
+  class Mailer
+  end
+
+  module Providers
+    class I18n
+      class Backend
+      end
+    end
+  end
+end

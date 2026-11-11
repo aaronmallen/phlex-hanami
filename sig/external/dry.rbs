@@ -1,0 +1,9 @@
+module Dry
+  class Inflector
+    def camelize: (String) -> String
+
+    def constantize: (String) -> untyped
+
+    def underscore: (String) -> String
+  end
+end

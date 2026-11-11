@@ -1,0 +1,8 @@
+# Generated from lib/phlex/hanami/mailer.rb with RBS::Inline
+
+module Phlex
+  module Hanami
+    module Mailer
+    end
+  end
+end

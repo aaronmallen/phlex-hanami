@@ -1,0 +1,39 @@
+# Generated from lib/phlex/hanami/context.rb with RBS::Inline
+
+module Phlex
+  module Hanami
+    class Context
+      extend ::Hanami::SliceConfigurable
+
+      def self.configure_for_slice: (singleton(::Hanami::Slice)) -> void
+
+      attr_reader inflector: Dry::Inflector
+
+      def initialize: (?inflector: Dry::Inflector?, ?routes: ::Hanami::Slice::RoutesHelper?, ?assets: ::Hanami::Assets?, ?request: ::Hanami::Action::Request?, ?i18n: ::Hanami::Providers::I18n::Backend?, **untyped) -> void
+
+      def assets: () -> ::Hanami::Assets
+
+      def content_for: (Symbol, ?String?) ?{ () -> String } -> String?
+
+      def csrf_token: () -> String?
+
+      def flash: () -> ::Hanami::Action::Flash
+
+      def i18n: () -> ::Hanami::Providers::I18n::Backend
+
+      def initialize_copy: (self) -> void
+
+      def request: () -> ::Hanami::Action::Request
+
+      def request?: () -> bool
+
+      def routes: () -> ::Hanami::Slice::RoutesHelper
+
+      def session: () -> ::Hanami::Action::Request::Session
+
+      private
+
+      def assets_hint: () -> String
+    end
+  end
+end

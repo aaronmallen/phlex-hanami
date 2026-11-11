@@ -1,0 +1,27 @@
+# Generated from lib/phlex/hanami/slice_configured_context.rb with RBS::Inline
+
+module Phlex
+  module Hanami
+    class SliceConfiguredContext < Module
+      attr_reader slice: singleton(::Hanami::Slice)
+
+      def initialize: (singleton(::Hanami::Slice)) -> void
+
+      def extended: (singleton(Context)) -> void
+
+      def inspect: () -> String
+
+      private
+
+      def define_new: () -> void
+
+      def dependencies: () -> Hash[Symbol, untyped]
+
+      def resolve_assets: () -> ::Hanami::Assets?
+
+      def resolve_i18n: () -> ::Hanami::Providers::I18n::Backend?
+
+      def resolve_routes: () -> ::Hanami::Slice::RoutesHelper?
+    end
+  end
+end

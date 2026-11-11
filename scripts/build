@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+#MISE description="Build the gem"
+#MISE alias=["b"]
+
+set -e
+
+mkdir -p pkg
+gem build phlex-hanami.gemspec -o \
+  "pkg/phlex-hanami-$(ruby -e "puts Gem::Specification.load('phlex-hanami.gemspec').version").gem"

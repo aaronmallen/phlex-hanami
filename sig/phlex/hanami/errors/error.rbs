@@ -1,0 +1,8 @@
+# Generated from lib/phlex/hanami/errors/error.rb with RBS::Inline
+
+module Phlex
+  module Hanami
+    class Error < StandardError
+    end
+  end
+end

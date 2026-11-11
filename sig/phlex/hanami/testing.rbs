@@ -1,0 +1,19 @@
+# Generated from lib/phlex/hanami/testing.rb with RBS::Inline
+
+module Phlex
+  module Hanami
+    module Testing
+      module ViewHelpers
+        def render: (::Phlex::SGML, ?context: (::Hanami::View::Context | Context)?, ?request: ::Hanami::Action::Request?) ?{ (?) -> untyped } -> String
+
+        def view_context: (?slice: singleton(::Hanami::Slice)?, ?request: ::Hanami::Action::Request?, **untyped) -> (::Hanami::View::Context | Context)
+
+        def view_request: (?String, ?csrf_token: String?, ?flash: Hash[Symbol | String, untyped], ?session: Hash[Symbol | String, untyped], **untyped) -> ::Hanami::Action::Request
+
+        private
+
+        def slice_for: (::Phlex::SGML) -> singleton(::Hanami::Slice)?
+      end
+    end
+  end
+end

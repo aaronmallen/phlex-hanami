@@ -1,0 +1,57 @@
+# Generated from lib/phlex/hanami/contextual.rb with RBS::Inline
+
+module Phlex
+  module Hanami
+    module Contextual
+      def self.included: (singleton(::Phlex::SGML)) -> void
+
+      module I18nOverrides
+        private
+
+        def _resolve_i18n_key: (String | Symbol) -> (String | Symbol)
+
+        def i18n_key_base: () -> String?
+      end
+
+      module ClassMethods
+        def configure_for_slice: (singleton(::Hanami::Slice)) -> void
+
+        def slice: () -> singleton(::Hanami::Slice)?
+      end
+
+      def asset_url: (String) -> String
+
+      def assets: () -> ::Hanami::Assets
+
+      def content_for: (Symbol, ?String?) ?{ () -> String } -> String?
+
+      def csrf_token: () -> String?
+
+      def flash: () -> ::Hanami::Action::Flash
+
+      def hanami_context: () -> (::Hanami::View::Context | Context)
+
+      def hanami_context?: () -> bool
+
+      def i18n: () -> ::Hanami::Providers::I18n::Backend
+
+      def path: (*untyped, **untyped) -> String
+
+      def request: () -> ::Hanami::Action::Request
+
+      def request?: () -> bool
+
+      def routes: () -> ::Hanami::Slice::RoutesHelper
+
+      def session: () -> ::Hanami::Action::Request::Session
+
+      def slice: () -> singleton(::Hanami::Slice)?
+
+      def url: (*untyped, **untyped) -> String
+
+      private
+
+      def _context: () -> (::Hanami::View::Context | Context)
+    end
+  end
+end

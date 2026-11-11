@@ -1,0 +1,16 @@
+module Phlex
+  class SGML
+    def self.call: (?String, ?context: Hash[untyped, untyped], ?fragments: Array[String]?) ?{ (?) -> untyped } -> String
+
+    def call: (?String, ?context: Hash[untyped, untyped], ?fragments: Array[String]?) ?{ (?) -> untyped } -> String
+
+    def context: () -> Hash[untyped, untyped]
+
+    def raw: (untyped) -> void
+
+    def safe: (String) -> untyped
+  end
+
+  class HTML < SGML
+  end
+end

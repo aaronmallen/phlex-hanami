@@ -1,0 +1,47 @@
+# Generated from lib/phlex/hanami/mailer/text.rb with RBS::Inline
+
+module Phlex
+  module Hanami
+    module Mailer
+      class Text
+        BLOCK_ELEMENTS: Array[String]
+
+        BLOCK_PATTERN: Regexp
+
+        ENTITIES: Hash[String, String]
+
+        ENTITY_PATTERN: Regexp
+
+        LINK_CLOSE: String
+
+        LINK_OPEN: String
+
+        def self.call: (_ToS) -> String
+
+        private def self.anchor_text: (String, String) -> String
+
+        private def self.body_of: (String) -> String
+
+        private def self.expand_anchors: (String) -> String
+
+        private def self.expand_blocks: (String) -> String
+
+        private def self.expand_breaks: (String) -> String
+
+        private def self.expand_list_items: (String) -> String
+
+        private def self.href_in: (String) -> String
+
+        private def self.restore_links: (String) -> String
+
+        private def self.strip_hidden_elements: (String) -> String
+
+        private def self.strip_tags: (String) -> String
+
+        private def self.tidy: (String) -> String
+
+        private def self.unescape: (String) -> String
+      end
+    end
+  end
+end

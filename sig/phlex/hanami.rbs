@@ -1,0 +1,7 @@
+# Generated from lib/phlex/hanami.rb with RBS::Inline
+
+module Phlex
+  module Hanami
+    CONTEXT_KEY: ::Symbol
+  end
+end

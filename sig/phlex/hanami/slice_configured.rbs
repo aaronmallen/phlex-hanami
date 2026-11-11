@@ -1,0 +1,19 @@
+# Generated from lib/phlex/hanami/slice_configured.rb with RBS::Inline
+
+module Phlex
+  module Hanami
+    class SliceConfigured < Module
+      attr_reader slice: singleton(::Hanami::Slice)
+
+      def initialize: (singleton(::Hanami::Slice)) -> void
+
+      def extended: (singleton(::Phlex::SGML) | singleton(::Hanami::Mailer)) -> void
+
+      def inspect: () -> String
+
+      private
+
+      def define_slice: () -> void
+    end
+  end
+end

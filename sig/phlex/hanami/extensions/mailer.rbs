@@ -1,0 +1,25 @@
+# Generated from lib/phlex/hanami/extensions/mailer.rb with RBS::Inline
+
+module Phlex
+  module Hanami
+    module Extensions
+      module Mailer
+        def self.install: () -> void
+
+        module ClassMethods
+          def configure_for_slice: (singleton(::Hanami::Slice)) -> void
+
+          def phlex_view: () -> singleton(::Phlex::SGML)?
+
+          def slice: () -> singleton(::Hanami::Slice)?
+
+          private
+
+          def view_name: (singleton(::Hanami::Slice)) -> String
+        end
+
+        def view: () -> untyped
+      end
+    end
+  end
+end

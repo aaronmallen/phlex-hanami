@@ -1,0 +1,27 @@
+# Generated from lib/phlex/hanami/mailer/renderable.rb with RBS::Inline
+
+module Phlex
+  module Hanami
+    module Mailer
+      module Renderable
+        def self.included: (singleton(::Phlex::SGML)) -> void
+
+        module ClassMethods
+          def call: (?context: (::Hanami::View::Context | Context)?, ?format: Symbol | String, **untyped) -> String
+
+          private
+
+          def default_layout: () -> singleton(::Phlex::SGML)?
+
+          def mail_context: () -> (::Hanami::View::Context | Context)?
+        end
+
+        module MailMethods
+          def path: (*untyped, **untyped) -> bot
+
+          def text_body: (String) -> String
+        end
+      end
+    end
+  end
+end
