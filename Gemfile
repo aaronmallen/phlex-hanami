@@ -6,6 +6,7 @@ gemspec
 
 group :development do
   gem "irb"
+  gem "rbs-inline", "~> 0.14"
 end
 
 group :development, :test do
@@ -17,13 +18,12 @@ group :development, :test do
   gem "minitest", "~> 5"
   gem "rack", "~> 3.0"
   gem "rack-test", "~> 2.0"
+  gem "rbs", "~> 4"
   gem "rspec", "~> 3"
   gem "simplecov", "~> 1", require: false
 end
 
 group :lint do
-  gem "rbs", "~> 4"
-  gem "rbs-inline", "~> 0.14"
   gem "rubocop", "~> 1"
   gem "rubocop-ordered_methods", "~> 0.14"
   gem "rubocop-performance", "~> 1"
