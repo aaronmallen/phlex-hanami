@@ -1,5 +1,7 @@
 # Phlex::Hanami
 
+[![Discord][discord-badge]][discord-link]
+
 An object oriented view layer for [Hanami](https://hanamirb.org). Write views, layouts and components as
 [Phlex](https://www.phlex.fun) classes instead of templates.
 
@@ -132,3 +134,7 @@ mise run lint        # Lint every file
 ## License
 
 This project is licensed under the [MIT License](LICENSE)
+
+[discord-badge]:
+https://img.shields.io/discord/1441938388780585062?style=for-the-badge&logo=discord&logoColor=white&label=Discord&labelColor=%235865F2
+[discord-link]: https://discord.gg/PqQdhf9VMF
