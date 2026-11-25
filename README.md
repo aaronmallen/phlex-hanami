@@ -1,5 +1,8 @@
 # Phlex::Hanami
 
+[![Build][build-badge]][build-workflow]
+[![Version][gem-badge]][rubygems.org]
+[![GitHub Sponsors][sponsor-badge]][sponsor-link]
 [![Discord][discord-badge]][discord-link]
 
 An object oriented view layer for [Hanami](https://hanamirb.org). Write views, layouts and components as
@@ -135,6 +138,12 @@ mise run lint        # Lint every file
 
 This project is licensed under the [MIT License](LICENSE)
 
+[build-badge]: https://aaronmallen.dev/aaron/phlex-hanami/actions/workflows/build.yml/badge.svg?branch=main&style=for-the-badge
+[build-workflow]: https://aaronmallen.dev/aaron/phlex-hanami/actions?workflow=build.yml
 [discord-badge]:
 https://img.shields.io/discord/1441938388780585062?style=for-the-badge&logo=discord&logoColor=white&label=Discord&labelColor=%235865F2
 [discord-link]: https://discord.gg/PqQdhf9VMF
+[gem-badge]: https://img.shields.io/gem/v/phlex-hanami?style=for-the-badge&logo=rubygems
+[rubygems.org]: https://rubygems.org/gems/phlex-hanami
+[sponsor-badge]: https://img.shields.io/github/sponsors/aaronmallen?style=for-the-badge
+[sponsor-link]: https://github.com/sponsors/aaronmallen
